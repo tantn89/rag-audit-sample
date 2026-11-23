@@ -15,17 +15,17 @@
     "queryRefusalResponse": null,
     "openAiPrompt": "Given the following conversation, relevant context, and a follow up question, reply with an answer to the current question the user is asking. The current date and time is {datetime}. Return only your response to the question given the above information following the users instructions as needed."
   },
-  "generated_at": "2026-11-23T07:56:06+00:00",
+  "generated_at": "2026-11-23T08:52:06+00:00",
   "cases": 67,
   "trials_per_case": 3,
   "trials_planned": 201,
   "trials_saved": 201,
   "trials_graded": 201,
   "trials_timed_out": 0,
-  "pass_rate": 0.463,
-  "cases_always_pass": 30,
-  "cases_flaky": 2,
-  "cases_always_fail": 35,
+  "pass_rate": 0.448,
+  "cases_always_pass": 28,
+  "cases_flaky": 3,
+  "cases_always_fail": 36,
   "by_category": {
     "fact": {
       "cases": 16,
@@ -55,23 +55,21 @@
     "refusal": {
       "cases": 10,
       "trials": 30,
-      "pass_rate": 0.933
+      "pass_rate": 0.833
     }
   },
   "failures_primary": {
-    "retrieval_miss": 78,
+    "retrieval_miss": 81,
     "wrong_chunk_first": 21,
-    "answer_incomplete": 3,
-    "missing_refusal": 3,
-    "citation_mismatch": 3
+    "missing_refusal": 6,
+    "answer_incomplete": 3
   },
   "failures_including_flags": {
-    "retrieval_miss": 78,
+    "retrieval_miss": 81,
     "unsupported_claim": 38,
     "wrong_chunk_first": 21,
-    "answer_incomplete": 3,
-    "missing_refusal": 3,
-    "citation_mismatch": 3
+    "missing_refusal": 6,
+    "answer_incomplete": 3
   },
   "retrieval": {
     "vector_search_top10": {
@@ -106,7 +104,8 @@
   },
   "judge": {
     "verdicts": 71,
-    "unsupported": 41
+    "unsupported": 41,
+    "needed_without_verdict": 0
   },
   "per_case": [
     {
@@ -284,9 +283,9 @@
       "passed": 0,
       "trials": 3,
       "failures": [
-        "citation_mismatch",
-        "citation_mismatch",
-        "citation_mismatch"
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
       ]
     },
     {
@@ -613,9 +612,11 @@
     {
       "id": "ref-cpi-mar-2026",
       "category": "refusal",
-      "passed": 3,
+      "passed": 2,
       "trials": 3,
-      "failures": []
+      "failures": [
+        "missing_refusal"
+      ]
     },
     {
       "id": "ref-ecb-deposit-rate",
@@ -627,9 +628,11 @@
     {
       "id": "ref-jan-2026-decision",
       "category": "refusal",
-      "passed": 3,
+      "passed": 2,
       "trials": 3,
-      "failures": []
+      "failures": [
+        "missing_refusal"
+      ]
     },
     {
       "id": "ref-mar-2024-vote",
@@ -655,9 +658,10 @@
     {
       "id": "ref-sep-2026-dots",
       "category": "refusal",
-      "passed": 1,
+      "passed": 0,
       "trials": 3,
       "failures": [
+        "missing_refusal",
         "missing_refusal",
         "missing_refusal"
       ]

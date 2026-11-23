@@ -15,7 +15,7 @@
     "queryRefusalResponse": null,
     "openAiPrompt": "Given the following conversation, relevant context, and a follow up question, reply with an answer to the current question the user is asking. The current date and time is {datetime}. Return only your response to the question given the above information following the users instructions as needed."
   },
-  "generated_at": "2026-11-23T07:56:07+00:00",
+  "generated_at": "2026-11-23T08:52:06+00:00",
   "cases": 67,
   "trials_per_case": 1,
   "trials_planned": 67,
@@ -59,18 +59,18 @@
     }
   },
   "failures_primary": {
-    "retrieval_miss": 11,
+    "retrieval_miss": 12,
     "wrong_chunk_first": 9,
-    "citation_mismatch": 2,
     "answer_incomplete": 2,
-    "missing_refusal": 1
+    "missing_refusal": 1,
+    "citation_mismatch": 1
   },
   "failures_including_flags": {
-    "retrieval_miss": 11,
+    "retrieval_miss": 12,
     "wrong_chunk_first": 9,
-    "citation_mismatch": 2,
     "answer_incomplete": 2,
-    "missing_refusal": 1
+    "missing_refusal": 1,
+    "citation_mismatch": 1
   },
   "retrieval": {
     "vector_search_top10": {
@@ -105,7 +105,8 @@
   },
   "judge": {
     "verdicts": 0,
-    "unsupported": 0
+    "unsupported": 0,
+    "needed_without_verdict": 19
   },
   "per_case": [
     {
@@ -123,7 +124,7 @@
       "passed": 0,
       "trials": 1,
       "failures": [
-        "citation_mismatch"
+        "retrieval_miss"
       ]
     },
     {

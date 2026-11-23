@@ -15,7 +15,7 @@
     "queryRefusalResponse": null,
     "openAiPrompt": "Given the following conversation, relevant context, and a follow up question, reply with an answer to the current question the user is asking. The current date and time is {datetime}. Return only your response to the question given the above information following the users instructions as needed."
   },
-  "generated_at": "2026-11-23T07:56:06+00:00",
+  "generated_at": "2026-11-23T08:52:07+00:00",
   "cases": 67,
   "trials_per_case": 3,
   "trials_planned": 201,
@@ -59,19 +59,19 @@
     }
   },
   "failures_primary": {
-    "retrieval_miss": 32,
+    "retrieval_miss": 36,
     "wrong_chunk_first": 26,
-    "citation_mismatch": 8,
     "missing_refusal": 5,
+    "citation_mismatch": 4,
     "answer_incomplete": 3,
     "unsupported_claim": 1
   },
   "failures_including_flags": {
-    "retrieval_miss": 32,
+    "retrieval_miss": 36,
     "wrong_chunk_first": 26,
     "unsupported_claim": 16,
-    "citation_mismatch": 8,
     "missing_refusal": 5,
+    "citation_mismatch": 4,
     "answer_incomplete": 3
   },
   "retrieval": {
@@ -107,7 +107,8 @@
   },
   "judge": {
     "verdicts": 56,
-    "unsupported": 21
+    "unsupported": 21,
+    "needed_without_verdict": 1
   },
   "per_case": [
     {
@@ -127,9 +128,9 @@
       "passed": 0,
       "trials": 3,
       "failures": [
-        "citation_mismatch",
-        "citation_mismatch",
-        "citation_mismatch"
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
       ]
     },
     {
@@ -328,7 +329,7 @@
       "trials": 3,
       "failures": [
         "retrieval_miss",
-        "citation_mismatch",
+        "retrieval_miss",
         "retrieval_miss"
       ]
     },

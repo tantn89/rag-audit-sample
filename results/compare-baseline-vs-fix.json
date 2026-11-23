@@ -1,24 +1,45 @@
 {
   "verdict": "improvement",
-  "base_rate": 0.4626865671641791,
+  "base_rate": 0.44776119402985076,
   "head_rate": 0.6268656716417911,
-  "delta": 0.16417910447761194,
+  "delta": 0.1791044776119403,
   "p_worse": 1.0,
   "p_better": 9.999000099990002e-05,
+  "permutations": 10000,
   "cases_compared": 67,
+  "question_level": {
+    "questions": 67,
+    "sign_test": {
+      "up": 15,
+      "down": 1,
+      "unchanged": 51,
+      "p_one_sided": 0.0002593994140625
+    },
+    "bootstrap_ci_of_gain": {
+      "mean": 0.1791044776119403,
+      "low": 0.08955223880597014,
+      "high": 0.27860696517412936,
+      "level": 0.95,
+      "resamples": 10000,
+      "seed": 20251210
+    },
+    "dropped": [
+      "date-sep-minutes-published"
+    ]
+  },
   "judge_agreement": {
     "v1": {
       "checked": 18,
       "agree": 11,
       "agreement_rate": 0.611,
       "disagreements": [
-        "date-current-range#1#a216a7254d79",
-        "fact-jan-next-meeting#2#641e1a621e54",
-        "mh-cut-count#2#d7225e275fd2",
-        "mh-unemployment-trend#2#31a5e529e84e",
-        "mh-waller-dissents#2#8742e7cee571",
-        "svm-dec-vote-split#2#0a35cc01ff0a",
-        "svm-jul-framework#3#f9ca763b72c3"
+        "date-current-range#1",
+        "fact-jan-next-meeting#2",
+        "mh-cut-count#2",
+        "mh-unemployment-trend#2",
+        "mh-waller-dissents#2",
+        "svm-dec-vote-split#2",
+        "svm-jul-framework#3"
       ]
     },
     "v2": {
@@ -26,13 +47,13 @@
       "agree": 11,
       "agreement_rate": 0.611,
       "disagreements": [
-        "date-current-range#1#a216a7254d79",
-        "fact-jan-next-meeting#2#641e1a621e54",
-        "mh-cut-count#2#d7225e275fd2",
-        "mh-iorb-change#3#4047d3c14558",
-        "mh-unemployment-trend#2#31a5e529e84e",
-        "mh-waller-dissents#2#8742e7cee571",
-        "svm-dec-vote-split#2#0a35cc01ff0a"
+        "date-current-range#1",
+        "fact-jan-next-meeting#2",
+        "mh-cut-count#2",
+        "mh-iorb-change#3",
+        "mh-unemployment-trend#2",
+        "mh-waller-dissents#2",
+        "svm-dec-vote-split#2"
       ]
     },
     "v3": {
@@ -40,14 +61,19 @@
       "agree": 11,
       "agreement_rate": 0.611,
       "disagreements": [
-        "date-current-range#1#a216a7254d79",
-        "fact-jan-next-meeting#2#641e1a621e54",
-        "mh-cut-count#2#d7225e275fd2",
-        "mh-miran-dissents#3#337eff58174a",
-        "mh-treasury-cap-path#1#36eda3470664",
-        "mh-waller-dissents#2#8742e7cee571",
-        "num-mar-treasury-cap#2#932a8df6513b"
+        "date-current-range#1",
+        "fact-jan-next-meeting#2",
+        "mh-cut-count#2",
+        "mh-miran-dissents#3",
+        "mh-treasury-cap-path#1",
+        "mh-waller-dissents#2",
+        "num-mar-treasury-cap#2"
       ]
+    },
+    "constant_unsupported": {
+      "checked": 18,
+      "agree": 13,
+      "agreement_rate": 0.722
     }
   }
 }

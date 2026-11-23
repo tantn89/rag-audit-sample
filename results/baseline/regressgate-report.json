@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "regressgate_version": "0.1.0",
-  "created_at": "2026-11-23T07:56:06+00:00",
+  "created_at": "2026-11-23T08:52:06+00:00",
   "target": "anythingllm-1.20.0:baseline",
   "repeats": 3,
   "metadata": {
@@ -575,7 +575,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "miran; schmid; 0.5 | 50 basis | half"
+              "detail": "miran; schmid; 0.5 | 50 basis | half a percentage | half percentage | half-point | half point | half of a percentage"
             },
             "context_support": {
               "passed": false,
@@ -602,7 +602,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "miran; schmid; 0.5 | 50 basis | half; no change | unchanged | hold* | maintain* | leave"
+              "detail": "miran; schmid; 0.5 | 50 basis | half a percentage | half percentage | half-point | half point | half of a percentage; no change | unchanged | hold the target | hold the range | hold the rate | hold ra"
             },
             "context_support": {
               "passed": false,
@@ -794,7 +794,9 @@
           "output": "In December 2025, the FOMC participants most likely considered further downward adjustments to the target range for the federal funds rate, with some indicating a 25 basis point reduction might be appropriate, while many suggested keeping the target range unchanged for the rest of the year. However, the exact target range set in December 2025 is not explicitly stated in the provided context. Prior to December, in July 2025, the target range was maintained at 4¼ to 4½ percent.",
           "metadata": {
             "failure": "retrieval_miss",
-            "flags": []
+            "flags": [
+              "refused"
+            ]
           }
         }
       ]
@@ -1330,7 +1332,7 @@
           "error": null,
           "output": "The FOMC statements provide the phone number (202) 452-2955 for media inquiries.",
           "metadata": {
-            "failure": "citation_mismatch",
+            "failure": "retrieval_miss",
             "flags": []
           }
         },
@@ -1355,7 +1357,7 @@
           "error": null,
           "output": "The FOMC statements provide the phone number 202-452-2955 for media inquiries.",
           "metadata": {
-            "failure": "citation_mismatch",
+            "failure": "retrieval_miss",
             "flags": []
           }
         },
@@ -1380,7 +1382,7 @@
           "error": null,
           "output": "The FOMC statements provide the phone number (202) 452-2955 for media inquiries.",
           "metadata": {
-            "failure": "citation_mismatch",
+            "failure": "retrieval_miss",
             "flags": []
           }
         }
@@ -2068,7 +2070,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "25"
+              "detail": "25 billion"
             },
             "context_support": {
               "passed": false,
@@ -2093,7 +2095,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "25"
+              "detail": "25 billion"
             },
             "context_support": {
               "passed": false,
@@ -2118,7 +2120,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "25"
+              "detail": "25 billion"
             },
             "context_support": {
               "passed": false,
@@ -2663,7 +2665,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "11.1 | 11"
+              "detail": "11.1 | 11 billion"
             },
             "context_support": {
               "passed": false,
@@ -2690,7 +2692,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "11.1 | 11"
+              "detail": "11.1 | 11 billion"
             },
             "context_support": {
               "passed": false,
@@ -2717,7 +2719,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "11.1 | 11"
+              "detail": "11.1 | 11 billion"
             },
             "context_support": {
               "passed": false,
@@ -2752,7 +2754,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "three | 3; 0.75 | 75 basis | three-quarter* | three quarter*"
+              "detail": "three times | three cuts | three rate cuts | three reductions | three occasions | three meetings | three separate | three quarter-point cuts | three quarter point cuts | 3 times | 3 cuts | 3 rate cuts"
             },
             "context_support": {
               "passed": false,
@@ -2777,7 +2779,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "three | 3; 0.75 | 75 basis | three-quarter* | three quarter*"
+              "detail": "three times | three cuts | three rate cuts | three reductions | three occasions | three meetings | three separate | three quarter-point cuts | three quarter point cuts | 3 times | 3 cuts | 3 rate cuts"
             },
             "context_support": {
               "passed": false,
@@ -2802,7 +2804,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "three | 3; 0.75 | 75 basis | three-quarter* | three quarter*"
+              "detail": "three times | three cuts | three rate cuts | three reductions | three occasions | three meetings | three separate | three quarter-point cuts | three quarter point cuts | 3 times | 3 cuts | 3 rate cuts"
             },
             "context_support": {
               "passed": false,
@@ -2853,7 +2855,9 @@
           "output": "The FOMC first lowered the federal funds target range at the December 9–10, 2025 meeting. Prior to this cut, the target range had been held unchanged since at least September 2025, though the exact range before the December cut is not explicitly stated in the provided excerpts. However, since participants discussed moving toward a more neutral stance and lowering the target range at the December meeting, it indicates the prior range was above the more neutral level aimed for then.",
           "metadata": {
             "failure": "retrieval_miss",
-            "flags": []
+            "flags": [
+              "refused"
+            ]
           }
         },
         {
@@ -3011,10 +3015,10 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "three | 3"
+              "detail": "three times | three 2025 | three policy | three decisions | three fomc | three meetings | three occasions | three dissents | three of the | 3 times | 3 2025 | 3 policy | 3 decisions | 3 fomc | 3 meeti"
             },
             "context_support": {
-              "passed": true,
+              "passed": false,
               "score": null,
               "detail": ""
             }
@@ -3038,10 +3042,10 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "three | 3"
+              "detail": "three times | three 2025 | three policy | three decisions | three fomc | three meetings | three occasions | three dissents | three of the | 3 times | 3 2025 | 3 policy | 3 decisions | 3 fomc | 3 meeti"
             },
             "context_support": {
-              "passed": true,
+              "passed": false,
               "score": null,
               "detail": ""
             }
@@ -3065,10 +3069,10 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "three | 3"
+              "detail": "three times | three 2025 | three policy | three decisions | three fomc | three meetings | three occasions | three dissents | three of the | 3 times | 3 2025 | 3 policy | 3 decisions | 3 fomc | 3 meeti"
             },
             "context_support": {
-              "passed": true,
+              "passed": false,
               "score": null,
               "detail": ""
             }
@@ -3386,7 +3390,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "0.5 | 50 basis | half; 4.5"
+              "detail": "0.5 | 50 basis | half a percentage | half percentage | half-point | half point | half of a percentage; 4.5"
             },
             "context_support": {
               "passed": false,
@@ -3413,7 +3417,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "0.5 | 50 basis | half"
+              "detail": "0.5 | 50 basis | half a percentage | half percentage | half-point | half point | half of a percentage"
             },
             "context_support": {
               "passed": false,
@@ -3489,7 +3493,9 @@
           "output": "The unemployment rate cited in the January 2025 minutes for December 2024 was 4.1 percent. In the December 2025 minutes for September 2025, the exact unemployment rate is not directly stated in the provided context, but it is mentioned that labor market conditions were slower in the third quarter than earlier in the year, which suggests a possible increase or stabilization in the unemployment rate compared to December 2024. Therefore, the December 2024 rate of 4.1 percent was likely lower than or about the same as the rate in September 2025.",
           "metadata": {
             "failure": "wrong_chunk_first",
-            "flags": []
+            "flags": [
+              "refused"
+            ]
           }
         },
         {
@@ -3533,7 +3539,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "no change | unchanged | hold* | leave | maintain*"
+              "detail": "no change | unchanged | hold the target | hold the range | hold the rate | hold rates | hold steady | holding the target | holding the range | holding rates | held the target | held the range | held r"
             },
             "context_support": {
               "passed": false,
@@ -3560,7 +3566,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "no change | unchanged | hold* | leave | maintain*"
+              "detail": "no change | unchanged | hold the target | hold the range | hold the rate | hold rates | hold steady | holding the target | holding the range | holding rates | held the target | held the range | held r"
             },
             "context_support": {
               "passed": false,
@@ -3587,7 +3593,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "no change | unchanged | hold* | leave | maintain*"
+              "detail": "no change | unchanged | hold the target | hold the range | hold the rate | hold rates | hold steady | holding the target | holding the range | holding rates | held the target | held the range | held r"
             },
             "context_support": {
               "passed": false,
@@ -3964,7 +3970,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "three | 3; unchanged | no change | leave; 0.5 | 50 basis | half"
+              "detail": "three members | three voted | three dissent* | three of the | 3 members | 3 voted | 3 dissent* | 3 of the; unchanged | no change | leave; 0.5 | 50 basis | half a percentage | half percentage | half-po"
             },
             "context_support": {
               "passed": false,
@@ -3991,7 +3997,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "three | 3; unchanged | no change | leave; 0.5 | 50 basis | half"
+              "detail": "three members | three voted | three dissent* | three of the | 3 members | 3 voted | 3 dissent* | 3 of the; unchanged | no change | leave; 0.5 | 50 basis | half a percentage | half percentage | half-po"
             },
             "context_support": {
               "passed": false,
@@ -4018,7 +4024,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "three | 3; unchanged | no change | leave; 0.5 | 50 basis | half"
+              "detail": "three members | three voted | three dissent* | three of the | 3 members | 3 voted | 3 dissent* | 3 of the; unchanged | no change | leave; 0.5 | 50 basis | half a percentage | half percentage | half-po"
             },
             "context_support": {
               "passed": false,
@@ -4411,7 +4417,9 @@
           "output": "The most recent FOMC rate decision covered by these documents is the establishment of the primary credit rate at 4.5 percent, as noted in the June 18, 2025 statement. However, the exact target range for the federal funds rate from the most recent FOMC meeting is not explicitly stated in the provided excerpts.",
           "metadata": {
             "failure": "retrieval_miss",
-            "flags": []
+            "flags": [
+              "refused"
+            ]
           }
         },
         {
@@ -4921,10 +4929,10 @@
           }
         },
         {
-          "passed": true,
+          "passed": false,
           "checks": {
             "refusal": {
-              "passed": true,
+              "passed": false,
               "score": null,
               "detail": ""
             }
@@ -4936,8 +4944,10 @@
           "error": null,
           "output": "The FOMC's January 2026 meeting minutes focus on discussions regarding the monetary policy framework review, emphasizing the need for robustness across various economic conditions, commitment to maximum employment and 2 percent inflation, and anchoring longer-term inflation expectations. However, the minutes do not specify any particular policy decisions made at that meeting.",
           "metadata": {
-            "failure": null,
-            "flags": []
+            "failure": "missing_refusal",
+            "flags": [
+              "refused_then_asserted"
+            ]
           }
         }
       ]
@@ -5309,10 +5319,10 @@
           }
         },
         {
-          "passed": true,
+          "passed": false,
           "checks": {
             "refusal": {
-              "passed": true,
+              "passed": false,
               "score": null,
               "detail": ""
             }
@@ -5324,8 +5334,10 @@
           "error": null,
           "output": "The provided documents do not specify the exact US CPI inflation rate for March 2026. They mention that inflation remained somewhat above the 2 percent target during 2026 and that inflation pressures were influenced by factors such as tariffs and goods prices, but no specific monthly CPI figure for March 2026 is given.",
           "metadata": {
-            "failure": null,
-            "flags": []
+            "failure": "missing_refusal",
+            "flags": [
+              "refused_then_asserted"
+            ]
           }
         },
         {
@@ -5377,10 +5389,10 @@
           }
         },
         {
-          "passed": true,
+          "passed": false,
           "checks": {
             "refusal": {
-              "passed": true,
+              "passed": false,
               "score": null,
               "detail": ""
             }
@@ -5392,8 +5404,10 @@
           "error": null,
           "output": "The June 2026 Summary of Economic Projections is contained in the FOMC minutes published on June 18, 2025 (document fomc-minutes-20250618.pdf). However, the provided context does not include the specific median federal funds rate projection for 2027 from that report. Therefore, I do not have that exact number available from the information given.",
           "metadata": {
-            "failure": null,
-            "flags": []
+            "failure": "missing_refusal",
+            "flags": [
+              "refused_then_asserted"
+            ]
           }
         },
         {

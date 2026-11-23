@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "regressgate_version": "0.1.0",
-  "created_at": "2026-11-23T07:56:06+00:00",
+  "created_at": "2026-11-23T08:52:07+00:00",
   "target": "anythingllm-1.20.0:fix",
   "repeats": 3,
   "metadata": {
@@ -2704,7 +2704,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "three | 3"
+              "detail": "three times | three cuts | three rate cuts | three reductions | three occasions | three meetings | three separate | three quarter-point cuts | three quarter point cuts | 3 times | 3 cuts | 3 rate cuts"
             },
             "context_support": {
               "passed": false,
@@ -2729,9 +2729,9 @@
           "passed": false,
           "checks": {
             "key_facts": {
-              "passed": true,
+              "passed": false,
               "score": null,
-              "detail": ""
+              "detail": "three times | three cuts | three rate cuts | three reductions | three occasions | three meetings | three separate | three quarter-point cuts | three quarter point cuts | 3 times | 3 cuts | 3 rate cuts"
             },
             "context_support": {
               "passed": false,
@@ -2746,7 +2746,7 @@
           "error": null,
           "output": "In 2025, the FOMC lowered the federal funds target range two times:\n\n1. On July 30, 2025, the target range was at 4¼ to 4½ percent. There was discussion about lowering it by 25 basis points, but no final action recorded then.\n\n2. On October 29, 2025, the target range was lowered to 3¾ to 4 percent, indicating a decrease of ½ percentage point from the prior range (4¼ to 4½ percent).\n\n3. On December 10, 2025, the target range was further lowered by ¼ percentage point to 3½ to 3¾ percent.\n\nThus, the total reduction in 2025 was ¾ percentage points (from approximately 4¼–4½ percent down to 3½–3¾ percent). The official votes lowering the range occurred in October and December meetings.",
           "metadata": {
-            "failure": "citation_mismatch",
+            "failure": "retrieval_miss",
             "flags": []
           }
         },
@@ -2756,7 +2756,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": ""
+              "detail": "three times | three cuts | three rate cuts | three reductions | three occasions | three meetings | three separate | three quarter-point cuts | three quarter point cuts | 3 times | 3 cuts | 3 rate cuts"
             },
             "context_support": {
               "passed": false,
@@ -2807,7 +2807,9 @@
           "output": "The FOMC first lowered the federal funds target range at the October 29, 2025 meeting. Before that cut, the specific previous target range is not explicitly stated in the provided context, but the October 29, 2025 meeting action lowered the range to 3.75 to 4 percent.",
           "metadata": {
             "failure": "retrieval_miss",
-            "flags": []
+            "flags": [
+              "refused"
+            ]
           }
         },
         {
@@ -2881,7 +2883,7 @@
               "detail": "march"
             },
             "context_support": {
-              "passed": true,
+              "passed": false,
               "score": null,
               "detail": ""
             }
@@ -2908,7 +2910,7 @@
               "detail": "march"
             },
             "context_support": {
-              "passed": true,
+              "passed": false,
               "score": null,
               "detail": ""
             }
@@ -2935,7 +2937,7 @@
               "detail": "march"
             },
             "context_support": {
-              "passed": true,
+              "passed": false,
               "score": null,
               "detail": ""
             }
@@ -3051,7 +3053,7 @@
               "detail": "december"
             },
             "context_support": {
-              "passed": true,
+              "passed": false,
               "score": null,
               "detail": ""
             }
@@ -3078,7 +3080,7 @@
               "detail": "december"
             },
             "context_support": {
-              "passed": true,
+              "passed": false,
               "score": null,
               "detail": ""
             }
@@ -3105,7 +3107,7 @@
               "detail": "december"
             },
             "context_support": {
-              "passed": true,
+              "passed": false,
               "score": null,
               "detail": ""
             }
@@ -3353,7 +3355,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "0.5 | 50 basis | half; 4.5"
+              "detail": "0.5 | 50 basis | half a percentage | half percentage | half-point | half point | half of a percentage; 4.5"
             },
             "context_support": {
               "passed": false,
@@ -3475,10 +3477,10 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "no change | unchanged | hold* | leave | maintain*"
+              "detail": "no change | unchanged | hold the target | hold the range | hold the rate | hold rates | hold steady | holding the target | holding the range | holding rates | held the target | held the range | held r"
             },
             "context_support": {
-              "passed": true,
+              "passed": false,
               "score": null,
               "detail": ""
             }
@@ -3502,10 +3504,10 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "no change | unchanged | hold* | leave | maintain*"
+              "detail": "no change | unchanged | hold the target | hold the range | hold the rate | hold rates | hold steady | holding the target | holding the range | holding rates | held the target | held the range | held r"
             },
             "context_support": {
-              "passed": true,
+              "passed": false,
               "score": null,
               "detail": ""
             }
@@ -3529,10 +3531,10 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "no change | unchanged | hold* | leave | maintain*"
+              "detail": "no change | unchanged | hold the target | hold the range | hold the rate | hold rates | hold steady | holding the target | holding the range | holding rates | held the target | held the range | held r"
             },
             "context_support": {
-              "passed": true,
+              "passed": false,
               "score": null,
               "detail": ""
             }
@@ -3898,7 +3900,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "three | 3"
+              "detail": "three members | three voted | three dissent* | three of the | 3 members | 3 voted | 3 dissent* | 3 of the"
             },
             "context_support": {
               "passed": false,
@@ -3923,7 +3925,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "three | 3"
+              "detail": "three members | three voted | three dissent* | three of the | 3 members | 3 voted | 3 dissent* | 3 of the"
             },
             "context_support": {
               "passed": false,
@@ -3948,7 +3950,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "three | 3"
+              "detail": "three members | three voted | three dissent* | three of the | 3 members | 3 voted | 3 dissent* | 3 of the"
             },
             "context_support": {
               "passed": false,
@@ -4245,7 +4247,7 @@
           "error": null,
           "output": "The January 2025 FOMC statement was released on January 29, 2025.",
           "metadata": {
-            "failure": "citation_mismatch",
+            "failure": "retrieval_miss",
             "flags": []
           }
         },
@@ -4270,7 +4272,7 @@
           "error": null,
           "output": "The January 2025 FOMC statement was released on January 29, 2025.",
           "metadata": {
-            "failure": "citation_mismatch",
+            "failure": "retrieval_miss",
             "flags": []
           }
         },
@@ -4295,7 +4297,7 @@
           "error": null,
           "output": "The January 2025 FOMC statement was released on January 29, 2025.",
           "metadata": {
-            "failure": "citation_mismatch",
+            "failure": "retrieval_miss",
             "flags": []
           }
         }
@@ -5303,7 +5305,9 @@
           "output": "The June 2026 Summary of Economic Projections is not directly provided in the context. However, the January 2025 Summary and projections discussed in the minutes indicate that inflation was projected to decline to 2 percent by 2027 and the modal policy rates implied by market data suggested only a single quarter-point cut during 2025 with rates remaining relatively elevated through 2026.\n\nSince the median rates in the December 2024 Summary were explicitly mentioned as a comparison point in the January 2025 minutes (CONTEXT 0) and the modal policy path in mid-2025 was broadly consistent with a single cut in 2025 and stable or slightly higher rates through early 2026, it can be inferred that the median federal funds rate for 2027 was likely projected to be around 2 to 2.5 percent in the subsequent projections from 2026, reflecting a gradual return to a neutral rate consistent with 2 percent inflation.\n\nHowever, given the absence of the exact June 2026 SEP data in the provided contexts, a precise figure for the median federal funds rate projection for 2027 cannot be stated from the available information.",
           "metadata": {
             "failure": "missing_refusal",
-            "flags": []
+            "flags": [
+              "refused_then_asserted"
+            ]
           }
         },
         {

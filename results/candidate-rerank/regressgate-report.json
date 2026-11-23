@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "regressgate_version": "0.1.0",
-  "created_at": "2026-11-23T07:56:07+00:00",
+  "created_at": "2026-11-23T08:52:06+00:00",
   "target": "anythingllm-1.20.0:candidate-rerank",
   "repeats": 1,
   "metadata": {
@@ -1088,7 +1088,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "three | 3; 0.75 | 75 basis | three-quarter* | three quarter*"
+              "detail": "three times | three cuts | three rate cuts | three reductions | three occasions | three meetings | three separate | three quarter-point cuts | three quarter point cuts | 3 times | 3 cuts | 3 rate cuts"
             },
             "context_support": {
               "passed": false,
@@ -1157,7 +1157,7 @@
               "detail": "march"
             },
             "context_support": {
-              "passed": true,
+              "passed": false,
               "score": null,
               "detail": ""
             }
@@ -1223,7 +1223,7 @@
               "detail": "december"
             },
             "context_support": {
-              "passed": true,
+              "passed": false,
               "score": null,
               "detail": ""
             }
@@ -1385,10 +1385,10 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "no change | unchanged | hold* | leave | maintain*"
+              "detail": "no change | unchanged | hold the target | hold the range | hold the rate | hold rates | hold steady | holding the target | holding the range | holding rates | held the target | held the range | held r"
             },
             "context_support": {
-              "passed": true,
+              "passed": false,
               "score": null,
               "detail": ""
             }
@@ -1552,7 +1552,7 @@
             "key_facts": {
               "passed": false,
               "score": null,
-              "detail": "three | 3"
+              "detail": "three members | three voted | three dissent* | three of the | 3 members | 3 voted | 3 dissent* | 3 of the"
             },
             "context_support": {
               "passed": false,
@@ -1699,7 +1699,7 @@
           "error": null,
           "output": "The January 2025 FOMC statement was released on January 29, 2025.",
           "metadata": {
-            "failure": "citation_mismatch",
+            "failure": "retrieval_miss",
             "flags": []
           }
         }
