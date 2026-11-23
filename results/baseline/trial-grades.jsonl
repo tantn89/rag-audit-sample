@@ -1,0 +1,201 @@
+{"case_id": "date-current-range", "trial": 1, "status": "ok", "passed": false, "failure": "answer_incomplete", "flags": [], "missing": ["december", "3.5-3.75"], "doc_recall": 1.0, "latency_ms": 2110}
+{"case_id": "date-current-range", "trial": 2, "status": "ok", "passed": false, "failure": "answer_incomplete", "flags": [], "missing": ["december", "3.5-3.75"], "doc_recall": 1.0, "latency_ms": 2048}
+{"case_id": "date-current-range", "trial": 3, "status": "ok", "passed": false, "failure": "answer_incomplete", "flags": [], "missing": ["december", "3.5-3.75"], "doc_recall": 1.0, "latency_ms": 2046}
+{"case_id": "date-jan-statement-release", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["january 29"], "doc_recall": 0.0, "latency_ms": 2197}
+{"case_id": "date-jan-statement-release", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["january 29"], "doc_recall": 0.0, "latency_ms": 1290}
+{"case_id": "date-jan-statement-release", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["january 29"], "doc_recall": 0.0, "latency_ms": 1470}
+{"case_id": "date-latest-decision", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": [], "missing": ["december", "3.5-3.75"], "doc_recall": 0.0, "latency_ms": 2844}
+{"case_id": "date-latest-decision", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": [], "missing": ["december", "3.5-3.75"], "doc_recall": 0.0, "latency_ms": 1934}
+{"case_id": "date-latest-decision", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["december", "3.5-3.75"], "doc_recall": 0.0, "latency_ms": 1601}
+{"case_id": "date-next-after-dec", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["january 27"], "doc_recall": 0.0, "latency_ms": 2492}
+{"case_id": "date-next-after-dec", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["january 27"], "doc_recall": 0.0, "latency_ms": 1485}
+{"case_id": "date-next-after-dec", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["january 27"], "doc_recall": 0.0, "latency_ms": 2518}
+{"case_id": "date-oct-minutes-approval", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1866}
+{"case_id": "date-oct-minutes-approval", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1409}
+{"case_id": "date-oct-minutes-approval", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1757}
+{"case_id": "date-sep-effective", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1676}
+{"case_id": "date-sep-effective", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1757}
+{"case_id": "date-sep-effective", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1721}
+{"case_id": "date-sep-minutes-published", "trial": 1, "status": "ok", "passed": false, "failure": "missing_refusal", "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1367}
+{"case_id": "date-sep-minutes-published", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1764}
+{"case_id": "date-sep-minutes-published", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1710}
+{"case_id": "fact-dec-dissenters", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["miran", "goolsbee", "schmid"], "doc_recall": 0.0, "latency_ms": 1813}
+{"case_id": "fact-dec-dissenters", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["miran", "goolsbee", "schmid"], "doc_recall": 0.0, "latency_ms": 1191}
+{"case_id": "fact-dec-dissenters", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["miran", "goolsbee", "schmid"], "doc_recall": 0.0, "latency_ms": 2235}
+{"case_id": "fact-dec-range", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["3.5-3.75"], "doc_recall": 0.0, "latency_ms": 1871}
+{"case_id": "fact-dec-range", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": [], "missing": ["3.5-3.75"], "doc_recall": 0.0, "latency_ms": 2634}
+{"case_id": "fact-dec-range", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": [], "missing": ["3.5-3.75"], "doc_recall": 0.0, "latency_ms": 2368}
+{"case_id": "fact-dec-reserve-purchases", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["ample"], "doc_recall": 0.0, "latency_ms": 1590}
+{"case_id": "fact-dec-reserve-purchases", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["ample"], "doc_recall": 0.0, "latency_ms": 2916}
+{"case_id": "fact-dec-reserve-purchases", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["ample"], "doc_recall": 0.0, "latency_ms": 1697}
+{"case_id": "fact-jan-decision", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["4.25-4.5"], "doc_recall": 0.0, "latency_ms": 1401}
+{"case_id": "fact-jan-decision", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["4.25-4.5"], "doc_recall": 0.0, "latency_ms": 2304}
+{"case_id": "fact-jan-decision", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["4.25-4.5"], "doc_recall": 0.0, "latency_ms": 1890}
+{"case_id": "fact-jan-next-meeting", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": [], "missing": ["march 18"], "doc_recall": 0.0, "latency_ms": 3273}
+{"case_id": "fact-jan-next-meeting", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": [], "missing": ["march 18"], "doc_recall": 0.0, "latency_ms": 1598}
+{"case_id": "fact-jan-next-meeting", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": [], "missing": ["march 18"], "doc_recall": 0.0, "latency_ms": 1519}
+{"case_id": "fact-jul-absent", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["kugler"], "doc_recall": 0.0, "latency_ms": 2221}
+{"case_id": "fact-jul-absent", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["kugler"], "doc_recall": 0.0, "latency_ms": 1349}
+{"case_id": "fact-jul-absent", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["kugler"], "doc_recall": 0.0, "latency_ms": 1503}
+{"case_id": "fact-jul-dissenters", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["bowman", "0.25 | 25 basis | quarter"], "doc_recall": 0.0, "latency_ms": 1635}
+{"case_id": "fact-jul-dissenters", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["bowman", "0.25 | 25 basis | quarter"], "doc_recall": 0.0, "latency_ms": 1368}
+{"case_id": "fact-jul-dissenters", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["bowman", "0.25 | 25 basis | quarter"], "doc_recall": 0.0, "latency_ms": 1424}
+{"case_id": "fact-jun-uncertainty", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 2176}
+{"case_id": "fact-jun-uncertainty", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1885}
+{"case_id": "fact-jun-uncertainty", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1659}
+{"case_id": "fact-mar-dissent", "trial": 1, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": [], "missing": ["waller", "securities holdings | balance sheet | runoff | pace of decline"], "doc_recall": 1.0, "latency_ms": 1201}
+{"case_id": "fact-mar-dissent", "trial": 2, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": [], "missing": ["waller", "securities holdings | balance sheet | runoff | pace of decline"], "doc_recall": 1.0, "latency_ms": 1373}
+{"case_id": "fact-mar-dissent", "trial": 3, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": [], "missing": ["waller", "securities holdings | balance sheet | runoff | pace of decline"], "doc_recall": 1.0, "latency_ms": 1267}
+{"case_id": "fact-may-alternate", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1434}
+{"case_id": "fact-may-alternate", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1602}
+{"case_id": "fact-may-alternate", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1615}
+{"case_id": "fact-media-contact", "trial": 1, "status": "ok", "passed": false, "failure": "citation_mismatch", "flags": [], "missing": [], "doc_recall": 0.0, "latency_ms": 1748}
+{"case_id": "fact-media-contact", "trial": 2, "status": "ok", "passed": false, "failure": "citation_mismatch", "flags": [], "missing": [], "doc_recall": 0.0, "latency_ms": 1213}
+{"case_id": "fact-media-contact", "trial": 3, "status": "ok", "passed": false, "failure": "citation_mismatch", "flags": [], "missing": [], "doc_recall": 0.0, "latency_ms": 1357}
+{"case_id": "fact-oct-dissenters", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["miran", "schmid"], "doc_recall": 0.0, "latency_ms": 2378}
+{"case_id": "fact-oct-dissenters", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["miran", "schmid", "0.5 | 50 basis | half"], "doc_recall": 0.0, "latency_ms": 1803}
+{"case_id": "fact-oct-dissenters", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["miran", "schmid", "0.5 | 50 basis | half", "no change | unchanged | hold* | maintain* | leave"], "doc_recall": 0.0, "latency_ms": 2246}
+{"case_id": "fact-oct-runoff-end", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 2349}
+{"case_id": "fact-oct-runoff-end", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1678}
+{"case_id": "fact-oct-runoff-end", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1582}
+{"case_id": "fact-sep-range", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["4-4.25"], "doc_recall": 0.0, "latency_ms": 1307}
+{"case_id": "fact-sep-range", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["4-4.25"], "doc_recall": 0.0, "latency_ms": 2135}
+{"case_id": "fact-sep-range", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["4-4.25"], "doc_recall": 0.0, "latency_ms": 1602}
+{"case_id": "fact-soma-manager", "trial": 1, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": [], "missing": ["perli"], "doc_recall": 1.0, "latency_ms": 1737}
+{"case_id": "fact-soma-manager", "trial": 2, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": [], "missing": ["perli"], "doc_recall": 1.0, "latency_ms": 2931}
+{"case_id": "fact-soma-manager", "trial": 3, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": [], "missing": ["perli"], "doc_recall": 1.0, "latency_ms": 2100}
+{"case_id": "fact-vice-chair", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1265}
+{"case_id": "fact-vice-chair", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1599}
+{"case_id": "fact-vice-chair", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1294}
+{"case_id": "mh-cut-count", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": [], "missing": ["three | 3", "0.75 | 75 basis | three-quarter* | three quarter*"], "doc_recall": 0.3333333333333333, "latency_ms": 2007}
+{"case_id": "mh-cut-count", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": [], "missing": ["three | 3", "0.75 | 75 basis | three-quarter* | three quarter*"], "doc_recall": 0.3333333333333333, "latency_ms": 1670}
+{"case_id": "mh-cut-count", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["three | 3", "0.75 | 75 basis | three-quarter* | three quarter*"], "doc_recall": 0.3333333333333333, "latency_ms": 1916}
+{"case_id": "mh-first-cut", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": [], "missing": ["4.25-4.5"], "doc_recall": 0.0, "latency_ms": 1749}
+{"case_id": "mh-first-cut", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["september", "4.25-4.5"], "doc_recall": 0.0, "latency_ms": 1935}
+{"case_id": "mh-first-cut", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["september", "4.25-4.5"], "doc_recall": 0.0, "latency_ms": 2276}
+{"case_id": "mh-goolsbee-oct-dec", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["no change | unchanged | hold* | leave | maintain*"], "doc_recall": 0.0, "latency_ms": 1640}
+{"case_id": "mh-goolsbee-oct-dec", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["no change | unchanged | hold* | leave | maintain*"], "doc_recall": 0.0, "latency_ms": 2186}
+{"case_id": "mh-goolsbee-oct-dec", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["no change | unchanged | hold* | leave | maintain*"], "doc_recall": 0.0, "latency_ms": 2093}
+{"case_id": "mh-iorb-change", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["3.65"], "doc_recall": 0.5, "latency_ms": 2364}
+{"case_id": "mh-iorb-change", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["3.65"], "doc_recall": 0.5, "latency_ms": 2293}
+{"case_id": "mh-iorb-change", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": [], "missing": ["3.65"], "doc_recall": 0.5, "latency_ms": 2276}
+{"case_id": "mh-kashkari-alternate", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["schmid"], "doc_recall": 0.5, "latency_ms": 1548}
+{"case_id": "mh-kashkari-alternate", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": [], "missing": ["schmid"], "doc_recall": 0.5, "latency_ms": 1594}
+{"case_id": "mh-kashkari-alternate", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["schmid"], "doc_recall": 0.5, "latency_ms": 1995}
+{"case_id": "mh-miran-dissents", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["three | 3"], "doc_recall": 0.6666666666666666, "latency_ms": 1984}
+{"case_id": "mh-miran-dissents", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["three | 3"], "doc_recall": 0.6666666666666666, "latency_ms": 2150}
+{"case_id": "mh-miran-dissents", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["three | 3"], "doc_recall": 0.6666666666666666, "latency_ms": 1828}
+{"case_id": "mh-schmid-dissents", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": [], "missing": ["october", "december"], "doc_recall": 0.0, "latency_ms": 1517}
+{"case_id": "mh-schmid-dissents", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["october", "december"], "doc_recall": 0.0, "latency_ms": 1576}
+{"case_id": "mh-schmid-dissents", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["october", "december"], "doc_recall": 0.0, "latency_ms": 2560}
+{"case_id": "mh-treasury-cap-path", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["december"], "doc_recall": 0.5, "latency_ms": 2416}
+{"case_id": "mh-treasury-cap-path", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": [], "missing": ["december"], "doc_recall": 0.5, "latency_ms": 2382}
+{"case_id": "mh-treasury-cap-path", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": [], "missing": ["december"], "doc_recall": 0.5, "latency_ms": 2999}
+{"case_id": "mh-unemployment-trend", "trial": 1, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": [], "missing": ["4.4"], "doc_recall": 1.0, "latency_ms": 2491}
+{"case_id": "mh-unemployment-trend", "trial": 2, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": [], "missing": ["4.4"], "doc_recall": 1.0, "latency_ms": 2589}
+{"case_id": "mh-unemployment-trend", "trial": 3, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": ["refused"], "missing": ["4.4"], "doc_recall": 1.0, "latency_ms": 2195}
+{"case_id": "mh-upper-bound-jul-oct", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["4.5"], "doc_recall": 0.0, "latency_ms": 1440}
+{"case_id": "mh-upper-bound-jul-oct", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["0.5 | 50 basis | half", "4.5"], "doc_recall": 0.0, "latency_ms": 1620}
+{"case_id": "mh-upper-bound-jul-oct", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["0.5 | 50 basis | half"], "doc_recall": 0.0, "latency_ms": 2216}
+{"case_id": "mh-waller-dissents", "trial": 1, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": ["refused"], "missing": ["march", "july"], "doc_recall": 1.0, "latency_ms": 1467}
+{"case_id": "mh-waller-dissents", "trial": 2, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": [], "missing": ["march", "july"], "doc_recall": 1.0, "latency_ms": 1487}
+{"case_id": "mh-waller-dissents", "trial": 3, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": ["refused"], "missing": ["july"], "doc_recall": 1.0, "latency_ms": 2054}
+{"case_id": "num-dec-iorb", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["3.65"], "doc_recall": 0.0, "latency_ms": 1388}
+{"case_id": "num-dec-iorb", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["unsupported_claim"], "missing": ["3.65"], "doc_recall": 0.0, "latency_ms": 1355}
+{"case_id": "num-dec-iorb", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["3.65"], "doc_recall": 0.0, "latency_ms": 1583}
+{"case_id": "num-dec-reserves", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1380}
+{"case_id": "num-dec-reserves", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1784}
+{"case_id": "num-dec-reserves", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1568}
+{"case_id": "num-dec-rmp-survey", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1518}
+{"case_id": "num-dec-rmp-survey", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 2060}
+{"case_id": "num-dec-rmp-survey", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1547}
+{"case_id": "num-dec-unemployment", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["4.4"], "doc_recall": 0.0, "latency_ms": 2147}
+{"case_id": "num-dec-unemployment", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["4.4"], "doc_recall": 0.0, "latency_ms": 1623}
+{"case_id": "num-dec-unemployment", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["4.4"], "doc_recall": 0.0, "latency_ms": 2033}
+{"case_id": "num-jan-iorb", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1787}
+{"case_id": "num-jan-iorb", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1869}
+{"case_id": "num-jan-iorb", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1949}
+{"case_id": "num-jan-pce", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1686}
+{"case_id": "num-jan-pce", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 2318}
+{"case_id": "num-jan-pce", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 2586}
+{"case_id": "num-jul-srf-peak", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["11.1 | 11"], "doc_recall": 0.0, "latency_ms": 1329}
+{"case_id": "num-jul-srf-peak", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["11.1 | 11"], "doc_recall": 0.0, "latency_ms": 1496}
+{"case_id": "num-jul-srf-peak", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["11.1 | 11"], "doc_recall": 0.0, "latency_ms": 1968}
+{"case_id": "num-mar-treasury-cap", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": [], "missing": ["25"], "doc_recall": 0.0, "latency_ms": 2073}
+{"case_id": "num-mar-treasury-cap", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": [], "missing": ["25"], "doc_recall": 0.0, "latency_ms": 3514}
+{"case_id": "num-mar-treasury-cap", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": ["25"], "doc_recall": 0.0, "latency_ms": 2806}
+{"case_id": "num-may-core-pce", "trial": 1, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": [], "doc_recall": 0.0, "latency_ms": 2407}
+{"case_id": "num-may-core-pce", "trial": 2, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": [], "doc_recall": 0.0, "latency_ms": 1946}
+{"case_id": "num-may-core-pce", "trial": 3, "status": "ok", "passed": false, "failure": "retrieval_miss", "flags": ["refused"], "missing": [], "doc_recall": 0.0, "latency_ms": 2117}
+{"case_id": "num-mbs-cap", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1805}
+{"case_id": "num-mbs-cap", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 2028}
+{"case_id": "num-mbs-cap", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1659}
+{"case_id": "num-oct-iorb", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1903}
+{"case_id": "num-oct-iorb", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1698}
+{"case_id": "num-oct-iorb", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1402}
+{"case_id": "num-oct-primary-credit", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1662}
+{"case_id": "num-oct-primary-credit", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1937}
+{"case_id": "num-oct-primary-credit", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1367}
+{"case_id": "num-repo-limit", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1287}
+{"case_id": "num-repo-limit", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1784}
+{"case_id": "num-repo-limit", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1535}
+{"case_id": "num-sep-iorb", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1890}
+{"case_id": "num-sep-iorb", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1966}
+{"case_id": "num-sep-iorb", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1898}
+{"case_id": "num-sep-onrrp", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1400}
+{"case_id": "num-sep-onrrp", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1449}
+{"case_id": "num-sep-onrrp", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1399}
+{"case_id": "num-sep-unemployment", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1658}
+{"case_id": "num-sep-unemployment", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 2035}
+{"case_id": "num-sep-unemployment", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 2495}
+{"case_id": "ref-bitcoin-dec-2025", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 2018}
+{"case_id": "ref-bitcoin-dec-2025", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1440}
+{"case_id": "ref-bitcoin-dec-2025", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1640}
+{"case_id": "ref-boe-nov-2025", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 2488}
+{"case_id": "ref-boe-nov-2025", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 2376}
+{"case_id": "ref-boe-nov-2025", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 2429}
+{"case_id": "ref-boj-level", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 2306}
+{"case_id": "ref-boj-level", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1843}
+{"case_id": "ref-boj-level", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1844}
+{"case_id": "ref-cpi-mar-2026", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1545}
+{"case_id": "ref-cpi-mar-2026", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1875}
+{"case_id": "ref-cpi-mar-2026", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1425}
+{"case_id": "ref-ecb-deposit-rate", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 2195}
+{"case_id": "ref-ecb-deposit-rate", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1781}
+{"case_id": "ref-ecb-deposit-rate", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1540}
+{"case_id": "ref-jan-2026-decision", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 2170}
+{"case_id": "ref-jan-2026-decision", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 2244}
+{"case_id": "ref-jan-2026-decision", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1691}
+{"case_id": "ref-mar-2024-vote", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 2949}
+{"case_id": "ref-mar-2024-vote", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1685}
+{"case_id": "ref-mar-2024-vote", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1520}
+{"case_id": "ref-powell-successor", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1618}
+{"case_id": "ref-powell-successor", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1308}
+{"case_id": "ref-powell-successor", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1952}
+{"case_id": "ref-rbi-repo", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1572}
+{"case_id": "ref-rbi-repo", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 3186}
+{"case_id": "ref-rbi-repo", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1653}
+{"case_id": "ref-sep-2026-dots", "trial": 1, "status": "ok", "passed": false, "failure": "missing_refusal", "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1483}
+{"case_id": "ref-sep-2026-dots", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1736}
+{"case_id": "ref-sep-2026-dots", "trial": 3, "status": "ok", "passed": false, "failure": "missing_refusal", "flags": [], "missing": [], "doc_recall": null, "latency_ms": 1749}
+{"case_id": "svm-dec-vote-split", "trial": 1, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": ["unsupported_claim"], "missing": ["three | 3", "unchanged | no change | leave", "0.5 | 50 basis | half"], "doc_recall": 1.0, "latency_ms": 2869}
+{"case_id": "svm-dec-vote-split", "trial": 2, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": ["unsupported_claim"], "missing": ["three | 3", "unchanged | no change | leave", "0.5 | 50 basis | half"], "doc_recall": 1.0, "latency_ms": 2560}
+{"case_id": "svm-dec-vote-split", "trial": 3, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": ["unsupported_claim"], "missing": ["three | 3", "unchanged | no change | leave", "0.5 | 50 basis | half"], "doc_recall": 1.0, "latency_ms": 2979}
+{"case_id": "svm-jul-framework", "trial": 1, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": [], "missing": ["finaliz* | close to"], "doc_recall": 1.0, "latency_ms": 3552}
+{"case_id": "svm-jul-framework", "trial": 2, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": ["unsupported_claim"], "missing": ["finaliz* | close to"], "doc_recall": 1.0, "latency_ms": 2784}
+{"case_id": "svm-jul-framework", "trial": 3, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": ["unsupported_claim"], "missing": ["finaliz* | close to"], "doc_recall": 1.0, "latency_ms": 2576}
+{"case_id": "svm-mar-runoff-support", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1758}
+{"case_id": "svm-mar-runoff-support", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 2412}
+{"case_id": "svm-mar-runoff-support", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1669}
+{"case_id": "svm-miran-reasons", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 2005}
+{"case_id": "svm-miran-reasons", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 2771}
+{"case_id": "svm-miran-reasons", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 2865}
+{"case_id": "svm-oct-equities-ai", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 2951}
+{"case_id": "svm-oct-equities-ai", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1683}
+{"case_id": "svm-oct-equities-ai", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 2138}
+{"case_id": "svm-oct-runoff-dissent", "trial": 1, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": ["unsupported_claim"], "missing": ["immediate*"], "doc_recall": 1.0, "latency_ms": 1931}
+{"case_id": "svm-oct-runoff-dissent", "trial": 2, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": ["unsupported_claim"], "missing": ["immediate*"], "doc_recall": 1.0, "latency_ms": 2025}
+{"case_id": "svm-oct-runoff-dissent", "trial": 3, "status": "ok", "passed": false, "failure": "wrong_chunk_first", "flags": ["unsupported_claim"], "missing": ["immediate*"], "doc_recall": 1.0, "latency_ms": 1899}
+{"case_id": "svm-sep-miran-abstain", "trial": 1, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 2110}
+{"case_id": "svm-sep-miran-abstain", "trial": 2, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 1906}
+{"case_id": "svm-sep-miran-abstain", "trial": 3, "status": "ok", "passed": true, "failure": null, "flags": [], "missing": [], "doc_recall": 1.0, "latency_ms": 2116}

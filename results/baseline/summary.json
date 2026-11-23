@@ -1,0 +1,727 @@
+{
+  "config": "baseline",
+  "description": "AnythingLLM 1.20.0 defaults: topN 4, similarity threshold 0.25, default vector search, default prompt, built-in local embedder.",
+  "embedder": "native (all-MiniLM-L6-v2, 1000-char chunks, 20 overlap)",
+  "workspace_settings": {
+    "slug": "fomc-2025",
+    "chatMode": "automatic",
+    "topN": 4,
+    "similarityThreshold": 0.25,
+    "openAiTemp": null,
+    "openAiHistory": 20,
+    "vectorSearchMode": "default",
+    "chatProvider": null,
+    "chatModel": null,
+    "queryRefusalResponse": null,
+    "openAiPrompt": "Given the following conversation, relevant context, and a follow up question, reply with an answer to the current question the user is asking. The current date and time is {datetime}. Return only your response to the question given the above information following the users instructions as needed."
+  },
+  "generated_at": "2026-11-23T07:56:06+00:00",
+  "cases": 67,
+  "trials_per_case": 3,
+  "trials_planned": 201,
+  "trials_saved": 201,
+  "trials_graded": 201,
+  "trials_timed_out": 0,
+  "pass_rate": 0.463,
+  "cases_always_pass": 30,
+  "cases_flaky": 2,
+  "cases_always_fail": 35,
+  "by_category": {
+    "fact": {
+      "cases": 16,
+      "trials": 48,
+      "pass_rate": 0.25
+    },
+    "numeric": {
+      "cases": 16,
+      "trials": 48,
+      "pass_rate": 0.688
+    },
+    "multi_hop": {
+      "cases": 11,
+      "trials": 33,
+      "pass_rate": 0.0
+    },
+    "statement_vs_minutes": {
+      "cases": 7,
+      "trials": 21,
+      "pass_rate": 0.571
+    },
+    "date_sensitive": {
+      "cases": 7,
+      "trials": 21,
+      "pass_rate": 0.381
+    },
+    "refusal": {
+      "cases": 10,
+      "trials": 30,
+      "pass_rate": 0.933
+    }
+  },
+  "failures_primary": {
+    "retrieval_miss": 78,
+    "wrong_chunk_first": 21,
+    "answer_incomplete": 3,
+    "missing_refusal": 3,
+    "citation_mismatch": 3
+  },
+  "failures_including_flags": {
+    "retrieval_miss": 78,
+    "unsupported_claim": 38,
+    "wrong_chunk_first": 21,
+    "answer_incomplete": 3,
+    "missing_refusal": 3,
+    "citation_mismatch": 3
+  },
+  "retrieval": {
+    "vector_search_top10": {
+      "cases": 56,
+      "recall@1": 0.315,
+      "recall@4": 0.562,
+      "recall@10": 0.938,
+      "mrr@10": 0.513
+    },
+    "chat_context_doc_recall": 0.562
+  },
+  "latency_s": {
+    "ok_trials": 201,
+    "mean": 1.92,
+    "p50": 1.84,
+    "p90": 2.56,
+    "p95": 2.87,
+    "max": 3.55,
+    "over_30s": 0,
+    "retried_trials": 9,
+    "timed_out_attempts": 12,
+    "slowest_timed_out_attempt_s": 180.023,
+    "billed_attempts": 213
+  },
+  "tokens": {
+    "prompt": 182991,
+    "completion": 9269
+  },
+  "est_cost_usd": {
+    "chat": 0.088,
+    "judge": 0.1037
+  },
+  "judge": {
+    "verdicts": 71,
+    "unsupported": 41
+  },
+  "per_case": [
+    {
+      "id": "date-current-range",
+      "category": "date_sensitive",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "answer_incomplete",
+        "answer_incomplete",
+        "answer_incomplete"
+      ]
+    },
+    {
+      "id": "date-jan-statement-release",
+      "category": "date_sensitive",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "date-latest-decision",
+      "category": "date_sensitive",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "date-next-after-dec",
+      "category": "date_sensitive",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "date-oct-minutes-approval",
+      "category": "date_sensitive",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "date-sep-effective",
+      "category": "date_sensitive",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "date-sep-minutes-published",
+      "category": "date_sensitive",
+      "passed": 2,
+      "trials": 3,
+      "failures": [
+        "missing_refusal"
+      ]
+    },
+    {
+      "id": "fact-dec-dissenters",
+      "category": "fact",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "fact-dec-range",
+      "category": "fact",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "fact-dec-reserve-purchases",
+      "category": "fact",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "fact-jan-decision",
+      "category": "fact",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "fact-jan-next-meeting",
+      "category": "fact",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "fact-jul-absent",
+      "category": "fact",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "fact-jul-dissenters",
+      "category": "fact",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "fact-jun-uncertainty",
+      "category": "fact",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "fact-mar-dissent",
+      "category": "fact",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "wrong_chunk_first",
+        "wrong_chunk_first",
+        "wrong_chunk_first"
+      ]
+    },
+    {
+      "id": "fact-may-alternate",
+      "category": "fact",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "fact-media-contact",
+      "category": "fact",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "citation_mismatch",
+        "citation_mismatch",
+        "citation_mismatch"
+      ]
+    },
+    {
+      "id": "fact-oct-dissenters",
+      "category": "fact",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "fact-oct-runoff-end",
+      "category": "fact",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "fact-sep-range",
+      "category": "fact",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "fact-soma-manager",
+      "category": "fact",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "wrong_chunk_first",
+        "wrong_chunk_first",
+        "wrong_chunk_first"
+      ]
+    },
+    {
+      "id": "fact-vice-chair",
+      "category": "fact",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "mh-cut-count",
+      "category": "multi_hop",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "mh-first-cut",
+      "category": "multi_hop",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "mh-goolsbee-oct-dec",
+      "category": "multi_hop",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "mh-iorb-change",
+      "category": "multi_hop",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "mh-kashkari-alternate",
+      "category": "multi_hop",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "mh-miran-dissents",
+      "category": "multi_hop",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "mh-schmid-dissents",
+      "category": "multi_hop",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "mh-treasury-cap-path",
+      "category": "multi_hop",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "mh-unemployment-trend",
+      "category": "multi_hop",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "wrong_chunk_first",
+        "wrong_chunk_first",
+        "wrong_chunk_first"
+      ]
+    },
+    {
+      "id": "mh-upper-bound-jul-oct",
+      "category": "multi_hop",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "mh-waller-dissents",
+      "category": "multi_hop",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "wrong_chunk_first",
+        "wrong_chunk_first",
+        "wrong_chunk_first"
+      ]
+    },
+    {
+      "id": "num-dec-iorb",
+      "category": "numeric",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "num-dec-reserves",
+      "category": "numeric",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "num-dec-rmp-survey",
+      "category": "numeric",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "num-dec-unemployment",
+      "category": "numeric",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "num-jan-iorb",
+      "category": "numeric",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "num-jan-pce",
+      "category": "numeric",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "num-jul-srf-peak",
+      "category": "numeric",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "num-mar-treasury-cap",
+      "category": "numeric",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "num-may-core-pce",
+      "category": "numeric",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "retrieval_miss",
+        "retrieval_miss",
+        "retrieval_miss"
+      ]
+    },
+    {
+      "id": "num-mbs-cap",
+      "category": "numeric",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "num-oct-iorb",
+      "category": "numeric",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "num-oct-primary-credit",
+      "category": "numeric",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "num-repo-limit",
+      "category": "numeric",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "num-sep-iorb",
+      "category": "numeric",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "num-sep-onrrp",
+      "category": "numeric",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "num-sep-unemployment",
+      "category": "numeric",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "ref-bitcoin-dec-2025",
+      "category": "refusal",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "ref-boe-nov-2025",
+      "category": "refusal",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "ref-boj-level",
+      "category": "refusal",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "ref-cpi-mar-2026",
+      "category": "refusal",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "ref-ecb-deposit-rate",
+      "category": "refusal",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "ref-jan-2026-decision",
+      "category": "refusal",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "ref-mar-2024-vote",
+      "category": "refusal",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "ref-powell-successor",
+      "category": "refusal",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "ref-rbi-repo",
+      "category": "refusal",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "ref-sep-2026-dots",
+      "category": "refusal",
+      "passed": 1,
+      "trials": 3,
+      "failures": [
+        "missing_refusal",
+        "missing_refusal"
+      ]
+    },
+    {
+      "id": "svm-dec-vote-split",
+      "category": "statement_vs_minutes",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "wrong_chunk_first",
+        "wrong_chunk_first",
+        "wrong_chunk_first"
+      ]
+    },
+    {
+      "id": "svm-jul-framework",
+      "category": "statement_vs_minutes",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "wrong_chunk_first",
+        "wrong_chunk_first",
+        "wrong_chunk_first"
+      ]
+    },
+    {
+      "id": "svm-mar-runoff-support",
+      "category": "statement_vs_minutes",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "svm-miran-reasons",
+      "category": "statement_vs_minutes",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "svm-oct-equities-ai",
+      "category": "statement_vs_minutes",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    },
+    {
+      "id": "svm-oct-runoff-dissent",
+      "category": "statement_vs_minutes",
+      "passed": 0,
+      "trials": 3,
+      "failures": [
+        "wrong_chunk_first",
+        "wrong_chunk_first",
+        "wrong_chunk_first"
+      ]
+    },
+    {
+      "id": "svm-sep-miran-abstain",
+      "category": "statement_vs_minutes",
+      "passed": 3,
+      "trials": 3,
+      "failures": []
+    }
+  ]
+}

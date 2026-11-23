@@ -1,0 +1,14 @@
+{
+  "config": "candidate-openai-embedder",
+  "description": "Baseline workspace settings with the embedder switched to text-embedding-3-small (OpenAI-compatible, through the guard), documents re-embedded. Measured with EMBEDDING_MODEL_MAX_CHUNK_LENGTH=8191, which AnythingLLM also uses as the chunk size, so chunks grew from ~900 to ~6200 chars: two changes, not one. Larger chunks favour document-level recall, so the reranker's lead over it is conservative.",
+  "embedder": "text-embedding-3-small via llm-api-guard (chunks up to 8191 chars, 20 overlap)",
+  "retrieval": {
+    "vector_search_top10": {
+      "cases": 56,
+      "recall@1": 0.515,
+      "recall@4": 0.75,
+      "recall@10": 1.0,
+      "mrr@10": 0.71
+    }
+  }
+}

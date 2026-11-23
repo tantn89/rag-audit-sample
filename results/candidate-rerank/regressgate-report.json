@@ -1,0 +1,2182 @@
+{
+  "schema_version": 1,
+  "regressgate_version": "0.1.0",
+  "created_at": "2026-11-23T07:56:07+00:00",
+  "target": "anythingllm-1.20.0:candidate-rerank",
+  "repeats": 1,
+  "metadata": {
+    "config": "candidate-rerank",
+    "settings": {
+      "topN": 4,
+      "similarityThreshold": 0.25,
+      "vectorSearchMode": "rerank",
+      "openAiPrompt": "Given the following conversation, relevant context, and a follow up question, reply with an answer to the current question the user is asking. The current date and time is {datetime}. Return only your response to the question given the above information following the users instructions as needed."
+    }
+  },
+  "cases": [
+    {
+      "id": "fact-jan-decision",
+      "tags": [
+        "fact"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 10.957,
+          "cost_usd": 0.000484,
+          "input_tokens": 1077,
+          "output_tokens": 33,
+          "error": null,
+          "output": "At its January 2025 meeting, the FOMC decided to maintain the target range for the federal funds rate at 4¼ to 4½ percent.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "fact-mar-dissent",
+      "tags": [
+        "fact"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "waller; securities holdings | balance sheet | runoff | pace of decline"
+            },
+            "context_support": {
+              "passed": false,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 9.653,
+          "cost_usd": 0.000568,
+          "input_tokens": 1119,
+          "output_tokens": 75,
+          "error": null,
+          "output": "According to the March 18–19, 2025 FOMC meeting minutes, almost all members agreed to reducing the target range for the federal funds rate, but the document does not specify any dissenting members or their preferences at that meeting. Therefore, there is no information about any member dissenting or preferring a different action at the March 2025 meeting.",
+          "metadata": {
+            "failure": "wrong_chunk_first",
+            "flags": [
+              "refused"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "fact-may-alternate",
+      "tags": [
+        "fact"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 10.956,
+          "cost_usd": 0.000387,
+          "input_tokens": 888,
+          "output_tokens": 20,
+          "error": null,
+          "output": "Neel Kashkari voted as an alternate member at the May 2025 FOMC meeting.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "fact-jul-dissenters",
+      "tags": [
+        "fact"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "bowman; waller; 0.25 | 25 basis | quarter"
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 10.255,
+          "cost_usd": 0.000471,
+          "input_tokens": 1066,
+          "output_tokens": 28,
+          "error": null,
+          "output": "In July 2025, there were no votes against the FOMC policy action; the vote was unanimous in favor of the action.",
+          "metadata": {
+            "failure": "answer_incomplete",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "fact-jul-absent",
+      "tags": [
+        "fact"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 9.538,
+          "cost_usd": 0.000438,
+          "input_tokens": 1007,
+          "output_tokens": 22,
+          "error": null,
+          "output": "Adriana D. Kugler was absent and not voting at the July 2025 FOMC meeting.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "fact-sep-range",
+      "tags": [
+        "fact"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "4-4.25"
+            },
+            "context_support": {
+              "passed": false,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 11.049,
+          "cost_usd": 0.000474,
+          "input_tokens": 1066,
+          "output_tokens": 30,
+          "error": null,
+          "output": "The FOMC set the target range for the federal funds rate at 4¼ to 4½ percent at its September 2025 meeting.",
+          "metadata": {
+            "failure": "retrieval_miss",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "fact-oct-dissenters",
+      "tags": [
+        "fact"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 10.955,
+          "cost_usd": 0.000527,
+          "input_tokens": 1101,
+          "output_tokens": 54,
+          "error": null,
+          "output": "In the October 2025 FOMC decision, two members dissented. Stephen I. Miran preferred to lower the target range for the federal funds rate by 1/2 percentage point, while Jeffrey R. Schmid preferred to leave the target range unchanged.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "fact-dec-dissenters",
+      "tags": [
+        "fact"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "miran; goolsbee; schmid"
+            },
+            "context_support": {
+              "passed": false,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 11.005,
+          "cost_usd": 0.000484,
+          "input_tokens": 901,
+          "output_tokens": 77,
+          "error": null,
+          "output": "According to the minutes from the FOMC meeting in late October 2025, two members voted against the Committee's policy rate decision. One member preferred to lower the target range by ½ percentage point, and the other preferred to leave the target range unchanged. However, the document does not specify the names of these two members who voted against the December 2025 policy decision.",
+          "metadata": {
+            "failure": "retrieval_miss",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "fact-dec-range",
+      "tags": [
+        "fact"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "3.5-3.75"
+            },
+            "context_support": {
+              "passed": false,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.86,
+          "cost_usd": 0.000451,
+          "input_tokens": 1020,
+          "output_tokens": 27,
+          "error": null,
+          "output": "The FOMC set the target range for the federal funds rate at 3¾ to 4 percent in December 2025.",
+          "metadata": {
+            "failure": "retrieval_miss",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "fact-oct-runoff-end",
+      "tags": [
+        "fact"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.883,
+          "cost_usd": 0.000423,
+          "input_tokens": 966,
+          "output_tokens": 23,
+          "error": null,
+          "output": "The FOMC decided to conclude the reduction of its aggregate securities holdings on December 1, 2025.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "fact-vice-chair",
+      "tags": [
+        "fact"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 5.034,
+          "cost_usd": 0.000482,
+          "input_tokens": 1116,
+          "output_tokens": 22,
+          "error": null,
+          "output": "John C. Williams was selected as Vice Chair of the FOMC at the January 2025 meeting.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "fact-soma-manager",
+      "tags": [
+        "fact"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "perli"
+            },
+            "context_support": {
+              "passed": false,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 5.717,
+          "cost_usd": 0.000521,
+          "input_tokens": 1202,
+          "output_tokens": 25,
+          "error": null,
+          "output": "The Committee selected the Federal Reserve Bank of New York to execute transactions for the System Open Market Account in January 2025.",
+          "metadata": {
+            "failure": "wrong_chunk_first",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "fact-dec-reserve-purchases",
+      "tags": [
+        "fact"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "treasury; ample"
+            },
+            "context_support": {
+              "passed": false,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 5.678,
+          "cost_usd": 0.000592,
+          "input_tokens": 992,
+          "output_tokens": 122,
+          "error": null,
+          "output": "The December 2025 FOMC statement indicated that the Committee anticipated beginning net purchases of securities, with respondents to a Desk survey expecting these purchases to start soon, potentially as early as by the next month or before the end of the first quarter of 2026. On average, these net purchases were anticipated to total about $220 billion over the first 12 months. The purpose of these purchases was to support the implementation of monetary policy, with the Committee closely monitoring economic conditions and prepared to adjust the stance of policy as appropriate to achieve its goals of maximum employment and inflation at the 2 percent target.",
+          "metadata": {
+            "failure": "wrong_chunk_first",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "fact-jun-uncertainty",
+      "tags": [
+        "fact"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 5.563,
+          "cost_usd": 0.000437,
+          "input_tokens": 1005,
+          "output_tokens": 22,
+          "error": null,
+          "output": "The June 2025 FOMC statement described uncertainty about the economic outlook as having diminished but remaining elevated.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "fact-jan-next-meeting",
+      "tags": [
+        "fact"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "march 18"
+            },
+            "context_support": {
+              "passed": false,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.975,
+          "cost_usd": 0.00041,
+          "input_tokens": 872,
+          "output_tokens": 38,
+          "error": null,
+          "output": "The next FOMC meeting after the January 28–29, 2025 meeting was scheduled to be held on Tuesday–Wednesday, May 6–7, 2025.",
+          "metadata": {
+            "failure": "wrong_chunk_first",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "fact-media-contact",
+      "tags": [
+        "fact"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "452-2955"
+            },
+            "context_support": {
+              "passed": false,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 5.477,
+          "cost_usd": 0.000226,
+          "input_tokens": 505,
+          "output_tokens": 15,
+          "error": null,
+          "output": "The FOMC statements do not provide a phone number for media inquiries.",
+          "metadata": {
+            "failure": "wrong_chunk_first",
+            "flags": [
+              "refused"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "num-jan-iorb",
+      "tags": [
+        "numeric"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.004,
+          "cost_usd": 0.000533,
+          "input_tokens": 1180,
+          "output_tokens": 38,
+          "error": null,
+          "output": "After the January 2025 FOMC meeting, the Federal Reserve set the interest rate paid on reserve balances at 4.4 percent, effective January 30, 2025.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "num-sep-iorb",
+      "tags": [
+        "numeric"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.859,
+          "cost_usd": 0.0005,
+          "input_tokens": 1167,
+          "output_tokens": 21,
+          "error": null,
+          "output": "The interest rate paid on reserve balances was lowered to 4.15 percent in September 2025.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "num-oct-iorb",
+      "tags": [
+        "numeric"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.23,
+          "cost_usd": 0.000526,
+          "input_tokens": 1176,
+          "output_tokens": 35,
+          "error": null,
+          "output": "The interest rate on reserve balances was lowered to 3.90 percent, effective October 30, 2025, following the October 2025 FOMC meeting.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "num-dec-iorb",
+      "tags": [
+        "numeric"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.121,
+          "cost_usd": 0.000505,
+          "input_tokens": 1163,
+          "output_tokens": 25,
+          "error": null,
+          "output": "The interest rate on reserve balances that took effect on December 11, 2025, was 3.65 percent.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "num-oct-primary-credit",
+      "tags": [
+        "numeric"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.158,
+          "cost_usd": 0.000484,
+          "input_tokens": 1095,
+          "output_tokens": 29,
+          "error": null,
+          "output": "In October 2025, the Board approved a primary credit rate of 4.0 percent, effective October 30, 2025.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "num-sep-onrrp",
+      "tags": [
+        "numeric"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 5.244,
+          "cost_usd": 0.00048,
+          "input_tokens": 1083,
+          "output_tokens": 29,
+          "error": null,
+          "output": "The FOMC directed an offering rate of 4 percent for standing overnight reverse repurchase agreement operations effective September 18, 2025.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "num-repo-limit",
+      "tags": [
+        "numeric"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.044,
+          "cost_usd": 0.000467,
+          "input_tokens": 1076,
+          "output_tokens": 23,
+          "error": null,
+          "output": "Before December 2025, the aggregate operation limit for the standing overnight repurchase agreement operations was $500 billion.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "num-mbs-cap",
+      "tags": [
+        "numeric"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.083,
+          "cost_usd": 0.000402,
+          "input_tokens": 913,
+          "output_tokens": 23,
+          "error": null,
+          "output": "The monthly redemption cap on agency debt and agency mortgage-backed securities was $35 billion during most of 2025.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "num-mar-treasury-cap",
+      "tags": [
+        "numeric"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 5.546,
+          "cost_usd": 0.000456,
+          "input_tokens": 1003,
+          "output_tokens": 34,
+          "error": null,
+          "output": "Beginning in April 2025, the FOMC set the monthly redemption cap on Treasury securities at $5 billion, reduced from the previous cap of $25 billion.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "num-jan-pce",
+      "tags": [
+        "numeric"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 5.202,
+          "cost_usd": 0.000501,
+          "input_tokens": 1121,
+          "output_tokens": 33,
+          "error": null,
+          "output": "According to the January 2025 minutes, total PCE price inflation over the 12 months ending in December 2024 was about 2.6 percent.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "num-may-core-pce",
+      "tags": [
+        "numeric"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.079,
+          "cost_usd": 0.000479,
+          "input_tokens": 1094,
+          "output_tokens": 26,
+          "error": null,
+          "output": "According to the May 2025 minutes, core PCE price inflation in March 2025 was 2.6 percent.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "num-sep-unemployment",
+      "tags": [
+        "numeric"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.568,
+          "cost_usd": 0.000461,
+          "input_tokens": 1049,
+          "output_tokens": 26,
+          "error": null,
+          "output": "The unemployment rate for August 2025 reported in the September 2025 FOMC minutes was 4.3 percent.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "num-dec-unemployment",
+      "tags": [
+        "numeric"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "4.4"
+            },
+            "context_support": {
+              "passed": false,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.748,
+          "cost_usd": 0.000482,
+          "input_tokens": 1066,
+          "output_tokens": 35,
+          "error": null,
+          "output": "The December 2025 minutes state that the unemployment rate had edged up through September 2025 but do not provide a specific numerical value for the unemployment rate in that month.",
+          "metadata": {
+            "failure": "wrong_chunk_first",
+            "flags": [
+              "refused"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "num-dec-reserves",
+      "tags": [
+        "numeric"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.118,
+          "cost_usd": 0.000434,
+          "input_tokens": 1008,
+          "output_tokens": 19,
+          "error": null,
+          "output": "The average level of reserve balances over the intermeeting period was around $2.9 trillion.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "num-dec-rmp-survey",
+      "tags": [
+        "numeric"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 5.889,
+          "cost_usd": 0.000446,
+          "input_tokens": 1000,
+          "output_tokens": 29,
+          "error": null,
+          "output": "According to the December 2025 minutes, Desk survey respondents expected net reserve management purchases of about $220 billion over the first 12 months.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "num-jul-srf-peak",
+      "tags": [
+        "numeric"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.821,
+          "cost_usd": 0.000508,
+          "input_tokens": 1121,
+          "output_tokens": 37,
+          "error": null,
+          "output": "According to the July 2025 minutes, the take-up at the standing repo facility (SRF) on June 30, 2025, was $11.1 billion.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "mh-cut-count",
+      "tags": [
+        "multi_hop"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "three | 3; 0.75 | 75 basis | three-quarter* | three quarter*"
+            },
+            "context_support": {
+              "passed": false,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.382,
+          "cost_usd": 0.000643,
+          "input_tokens": 1071,
+          "output_tokens": 134,
+          "error": null,
+          "output": "In 2025, the Federal Open Market Committee (FOMC) lowered the federal funds target range at least twice based on the minutes:\n\n1. On October 29, 2025, the FOMC lowered the target range from 4 to 4¼ percent down to 3¾ to 4 percent, a reduction of ¼ percentage point.\n\n2. On December 10, 2025, the FOMC further lowered the target range by ¼ percentage point to 3½ to 3¾ percent.\n\nIn total, these two decreases amount to a ½ percentage point reduction in the federal funds target range during 2025.",
+          "metadata": {
+            "failure": "retrieval_miss",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "mh-first-cut",
+      "tags": [
+        "multi_hop"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "september; 4.25-4.5"
+            },
+            "context_support": {
+              "passed": false,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 5.403,
+          "cost_usd": 0.000521,
+          "input_tokens": 1074,
+          "output_tokens": 57,
+          "error": null,
+          "output": "The FOMC first lowered the federal funds target range at the October 29, 2025 meeting. Prior to that cut, the target range was above 3¾ to 4 percent, as the range was lowered to 3¾ to 4 percent at that meeting.",
+          "metadata": {
+            "failure": "retrieval_miss",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "mh-waller-dissents",
+      "tags": [
+        "multi_hop"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "march"
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 5.368,
+          "cost_usd": 0.000699,
+          "input_tokens": 1163,
+          "output_tokens": 146,
+          "error": null,
+          "output": "In 2025, Christopher J. Waller dissented at the following FOMC meetings:\n\n- July 30, 2025: He preferred to lower the target range for the federal funds rate by 1/4 percentage point.\n- September 17, 2025: He voted for the monetary policy action, but the document indicates dissenters preferred a rate decrease; however, in this case, Waller was not a dissenter. The dissenter was Stephen I. Miran, so Waller did not dissent here.\n\nTherefore, Christopher J. Waller dissented only at the July 30, 2025 meeting, preferring a 1/4 percentage point decrease in the federal funds rate.",
+          "metadata": {
+            "failure": "retrieval_miss",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "mh-miran-dissents",
+      "tags": [
+        "multi_hop"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 5.905,
+          "cost_usd": 0.000518,
+          "input_tokens": 1127,
+          "output_tokens": 42,
+          "error": null,
+          "output": "Stephen I. Miran voted against three 2025 FOMC policy decisions. In each case, he preferred to lower the target range for the federal funds rate by ½ percentage point at those meetings.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "mh-schmid-dissents",
+      "tags": [
+        "multi_hop"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "december"
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.824,
+          "cost_usd": 0.00049,
+          "input_tokens": 1048,
+          "output_tokens": 44,
+          "error": null,
+          "output": "In 2025, Jeffrey R. Schmid voted against the policy action at the October 29 meeting (context 1). At that meeting, he preferred no change to the target range for the federal funds rate.",
+          "metadata": {
+            "failure": "retrieval_miss",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "mh-iorb-change",
+      "tags": [
+        "multi_hop"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 6.525,
+          "cost_usd": 0.000532,
+          "input_tokens": 1183,
+          "output_tokens": 37,
+          "error": null,
+          "output": "Between the January 2025 and December 2025 FOMC meetings, the interest rate paid on reserve balances decreased from 4.4 percent to 3.65 percent.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "mh-treasury-cap-path",
+      "tags": [
+        "multi_hop"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "december"
+            },
+            "context_support": {
+              "passed": false,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.245,
+          "cost_usd": 0.00052,
+          "input_tokens": 1013,
+          "output_tokens": 72,
+          "error": null,
+          "output": "Over the course of 2025, the monthly cap on Treasury securities redemptions was reduced from $25 billion to $5 billion starting in April. Initially, the Federal Reserve was reducing holdings of Treasury securities with a monthly redemption cap of $25 billion, but beginning in April 2025, this cap was lowered significantly to $5 billion per month.",
+          "metadata": {
+            "failure": "retrieval_miss",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "mh-upper-bound-jul-oct",
+      "tags": [
+        "multi_hop"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": false,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 5.305,
+          "cost_usd": 0.000516,
+          "input_tokens": 1129,
+          "output_tokens": 40,
+          "error": null,
+          "output": "The upper bound of the federal funds target range fell from 4½ percent in July 2025 to 4 percent in October 2025, a decrease of 0.5 percentage points.",
+          "metadata": {
+            "failure": "citation_mismatch",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "mh-unemployment-trend",
+      "tags": [
+        "multi_hop"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "4.4"
+            },
+            "context_support": {
+              "passed": false,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.73,
+          "cost_usd": 0.000521,
+          "input_tokens": 1087,
+          "output_tokens": 54,
+          "error": null,
+          "output": "The unemployment rate cited in the January 2025 minutes for December 2024 was 4.1 percent. In the December 2025 minutes, the unemployment rate for September 2025 had edged up, indicating it was higher than 4.1 percent.",
+          "metadata": {
+            "failure": "retrieval_miss",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "mh-goolsbee-oct-dec",
+      "tags": [
+        "multi_hop"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "no change | unchanged | hold* | leave | maintain*"
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 5.315,
+          "cost_usd": 0.000462,
+          "input_tokens": 1004,
+          "output_tokens": 38,
+          "error": null,
+          "output": "Austan D. Goolsbee voted in favor of the monetary policy actions at both the October 2025 and December 2025 Federal Open Market Committee (FOMC) meetings.",
+          "metadata": {
+            "failure": "retrieval_miss",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "mh-kashkari-alternate",
+      "tags": [
+        "multi_hop"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "schmid"
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.793,
+          "cost_usd": 0.000564,
+          "input_tokens": 1191,
+          "output_tokens": 55,
+          "error": null,
+          "output": "According to the January 2025 minutes, Neel Kashkari was an alternate member of the Federal Open Market Committee, but the minutes do not specify whose alternate he was. Neel Kashkari voted as an alternate member at the May 7, 2025 meeting.",
+          "metadata": {
+            "failure": "answer_incomplete",
+            "flags": [
+              "refused"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "svm-miran-reasons",
+      "tags": [
+        "statement_vs_minutes"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 5.679,
+          "cost_usd": 0.000639,
+          "input_tokens": 1165,
+          "output_tokens": 108,
+          "error": null,
+          "output": "According to the September 2025 minutes, Governor Miran preferred a ½ percentage point cut in the target range for the federal funds rate due to further softening in the labor market over the first half of the year and because he viewed underlying inflation as meaningfully closer to 2 percent than was apparent in the data. Additionally, he believed that additional policy easing was appropriate to reflect that the neutral rate of interest had fallen owing to factors such as increased tariff revenues that raised net national savings and changes in immigration policy that reduced population growth.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "svm-oct-runoff-dissent",
+      "tags": [
+        "statement_vs_minutes"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 5.583,
+          "cost_usd": 0.00046,
+          "input_tokens": 1030,
+          "output_tokens": 30,
+          "error": null,
+          "output": "The October 2025 minutes indicate that one member who voted against the Committee’s policy rate decision also preferred an immediate end to the balance sheet runoff.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "svm-mar-runoff-support",
+      "tags": [
+        "statement_vs_minutes"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.643,
+          "cost_usd": 0.000462,
+          "input_tokens": 1058,
+          "output_tokens": 24,
+          "error": null,
+          "output": "According to the March 2025 minutes, almost all participants supported slowing the pace of balance sheet runoff at that meeting.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "svm-dec-vote-split",
+      "tags": [
+        "statement_vs_minutes"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "three | 3"
+            },
+            "context_support": {
+              "passed": false,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.814,
+          "cost_usd": 0.000584,
+          "input_tokens": 1083,
+          "output_tokens": 94,
+          "error": null,
+          "output": "The December 2025 minutes describe the vote on the policy rate as having two members dissenting: one preferred to lower the target range by half a percentage point, while the other preferred to keep the target range unchanged. Additionally, one dissenting member also favored an immediate end to the balance sheet runoff. All members agreed on concluding the reduction of securities holdings on December 1 and affirmed their strong commitment to supporting maximum employment and returning inflation to the 2 percent objective.",
+          "metadata": {
+            "failure": "wrong_chunk_first",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "svm-jul-framework",
+      "tags": [
+        "statement_vs_minutes"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "finaliz* | close to"
+            },
+            "context_support": {
+              "passed": false,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.918,
+          "cost_usd": 0.000553,
+          "input_tokens": 1055,
+          "output_tokens": 82,
+          "error": null,
+          "output": "The July 2025 minutes state that participants continued their discussion on the ongoing review of the Federal Reserve’s monetary policy strategy, tools, and communication practices. They had made important progress toward revising the Committee’s Statement on Longer-Run Goals and Monetary Policy Strategy, with discussions focusing on potential revisions that would incorporate lessons learned since the 2020 framework review and be robust across a wide range of economic conditions.",
+          "metadata": {
+            "failure": "wrong_chunk_first",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "svm-oct-equities-ai",
+      "tags": [
+        "statement_vs_minutes"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 5.366,
+          "cost_usd": 0.000432,
+          "input_tokens": 952,
+          "output_tokens": 32,
+          "error": null,
+          "output": "According to the October 2025 minutes, the strong performance of the largest technology companies' stocks was driven by market participants’ optimism about artificial intelligence (AI).",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "svm-sep-miran-abstain",
+      "tags": [
+        "statement_vs_minutes"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.632,
+          "cost_usd": 0.000514,
+          "input_tokens": 1157,
+          "output_tokens": 32,
+          "error": null,
+          "output": "Stephen Miran abstained from the vote to ratify the Desk’s domestic transactions because he had just been sworn in as a member of the Board that morning.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "date-jan-statement-release",
+      "tags": [
+        "date_sensitive"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": false,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.943,
+          "cost_usd": 0.000394,
+          "input_tokens": 905,
+          "output_tokens": 20,
+          "error": null,
+          "output": "The January 2025 FOMC statement was released on January 29, 2025.",
+          "metadata": {
+            "failure": "citation_mismatch",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "date-latest-decision",
+      "tags": [
+        "date_sensitive"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "december; 3.5-3.75"
+            },
+            "context_support": {
+              "passed": false,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.364,
+          "cost_usd": 0.000491,
+          "input_tokens": 1024,
+          "output_tokens": 51,
+          "error": null,
+          "output": "The most recent FOMC rate decision covered by these documents is from the October 29, 2025 meeting. The Committee decided to lower the target range for the federal funds rate by ¼ percentage point to 3¾ to 4 percent.",
+          "metadata": {
+            "failure": "wrong_chunk_first",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "date-current-range",
+      "tags": [
+        "date_sensitive"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "key_facts": {
+              "passed": false,
+              "score": null,
+              "detail": "december; 3.5-3.75"
+            },
+            "context_support": {
+              "passed": false,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.562,
+          "cost_usd": 0.000418,
+          "input_tokens": 981,
+          "output_tokens": 16,
+          "error": null,
+          "output": "The current federal funds target range is 4¼ to 4½ percent.",
+          "metadata": {
+            "failure": "retrieval_miss",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "date-sep-minutes-published",
+      "tags": [
+        "date_sensitive"
+      ],
+      "trials": [
+        {
+          "passed": false,
+          "checks": {
+            "refusal": {
+              "passed": false,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 6.542,
+          "cost_usd": 0.000311,
+          "input_tokens": 649,
+          "output_tokens": 32,
+          "error": null,
+          "output": "The minutes of the September 2025 FOMC meeting were published on November 23, 2026, at 6:36:32 AM.",
+          "metadata": {
+            "failure": "missing_refusal",
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "date-next-after-dec",
+      "tags": [
+        "date_sensitive"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.241,
+          "cost_usd": 0.0004,
+          "input_tokens": 865,
+          "output_tokens": 34,
+          "error": null,
+          "output": "The next FOMC meeting after December 9–10, 2025, is scheduled for Tuesday–Wednesday, January 27–28, 2026.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "date-sep-effective",
+      "tags": [
+        "date_sensitive"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 5.582,
+          "cost_usd": 0.000515,
+          "input_tokens": 1192,
+          "output_tokens": 24,
+          "error": null,
+          "output": "The September 2025 cut in the interest rate on reserve balances took effect on September 18, 2025.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "date-oct-minutes-approval",
+      "tags": [
+        "date_sensitive"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "key_facts": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            },
+            "context_support": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 6.279,
+          "cost_usd": 0.000566,
+          "input_tokens": 1320,
+          "output_tokens": 24,
+          "error": null,
+          "output": "The minutes of the October 2025 meeting were approved by notation vote completed on November 18, 2025.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "ref-jan-2026-decision",
+      "tags": [
+        "refusal"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "refusal": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.885,
+          "cost_usd": 0.00052,
+          "input_tokens": 1056,
+          "output_tokens": 61,
+          "error": null,
+          "output": "The specific decisions made by the FOMC at its January 2026 meeting are not included in the provided context. The latest available minutes in the context mention the next FOMC meeting to be held January 27–28, 2026, but do not detail the outcomes of that meeting.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "ref-ecb-deposit-rate",
+      "tags": [
+        "refusal"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "refusal": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.308,
+          "cost_usd": 0.000464,
+          "input_tokens": 1065,
+          "output_tokens": 24,
+          "error": null,
+          "output": "The provided documents do not include information about the deposit facility rate set by the European Central Bank in December 2025.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "ref-boe-nov-2025",
+      "tags": [
+        "refusal"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "refusal": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.932,
+          "cost_usd": 0.000567,
+          "input_tokens": 1161,
+          "output_tokens": 64,
+          "error": null,
+          "output": "The provided context does not include information about the Bank of England's Monetary Policy Committee decisions in November 2025. It only contains details about the U.S. Federal Reserve's FOMC decisions during 2025. Therefore, I do not have the Bank of England's November 2025 decision or vote information.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "ref-boj-level",
+      "tags": [
+        "refusal"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "refusal": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 5.989,
+          "cost_usd": 0.000532,
+          "input_tokens": 1134,
+          "output_tokens": 49,
+          "error": null,
+          "output": "The provided documents do not specify the exact level to which the Bank of Japan raised its policy rate in January 2025. They only indicate that the Bank of Japan increased its policy rate as a part of gradually removing policy accommodation during that period.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "ref-mar-2024-vote",
+      "tags": [
+        "refusal"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "refusal": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 4.955,
+          "cost_usd": 0.000494,
+          "input_tokens": 970,
+          "output_tokens": 66,
+          "error": null,
+          "output": "The provided context does not include information about the number of FOMC members who voted in favor of the policy action at the March 2024 meeting. It only includes details from 2025 and later. Therefore, I cannot determine how many members voted in favor at the March 2024 meeting based on the given information.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "ref-powell-successor",
+      "tags": [
+        "refusal"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "refusal": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.154,
+          "cost_usd": 0.000422,
+          "input_tokens": 980,
+          "output_tokens": 19,
+          "error": null,
+          "output": "The provided documents do not contain information about who was nominated to succeed Jerome Powell as Fed Chair.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "ref-cpi-mar-2026",
+      "tags": [
+        "refusal"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "refusal": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.195,
+          "cost_usd": 0.000518,
+          "input_tokens": 1099,
+          "output_tokens": 49,
+          "error": null,
+          "output": "The provided documents contain information on inflation through early 2025 but do not include specific data for US CPI inflation in March 2026. Therefore, I cannot provide the US CPI inflation rate for March 2026 based on the available context.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "ref-sep-2026-dots",
+      "tags": [
+        "refusal"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "refusal": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.909,
+          "cost_usd": 0.000467,
+          "input_tokens": 1016,
+          "output_tokens": 38,
+          "error": null,
+          "output": "The June 2026 Summary of Economic Projections is not included in the provided context. Therefore, I cannot provide the median federal funds rate projection for 2027 from that specific Summary.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "ref-rbi-repo",
+      "tags": [
+        "refusal"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "refusal": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.966,
+          "cost_usd": 0.000523,
+          "input_tokens": 1048,
+          "output_tokens": 65,
+          "error": null,
+          "output": "The provided documents relate to Federal Reserve meetings and market conditions in 2025 and do not contain information about the Reserve Bank of India or any changes it made to its repo rate in 2025. Therefore, I do not have data on the Reserve Bank of India's repo rate changes in 2025 from the available context.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "ref-bitcoin-dec-2025",
+      "tags": [
+        "refusal"
+      ],
+      "trials": [
+        {
+          "passed": true,
+          "checks": {
+            "refusal": {
+              "passed": true,
+              "score": null,
+              "detail": ""
+            }
+          },
+          "latency_s": 3.13,
+          "cost_usd": 0.000474,
+          "input_tokens": 1054,
+          "output_tokens": 33,
+          "error": null,
+          "output": "The provided FOMC minutes and related context do not contain any information about the price of Bitcoin at the time of the December 2025 FOMC meeting.",
+          "metadata": {
+            "failure": null,
+            "flags": []
+          }
+        }
+      ]
+    }
+  ]
+}
