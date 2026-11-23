@@ -1,0 +1,102 @@
+{
+  "source": "built by report/build-report-figures.py from results/",
+  "pass_rate": {
+    "baseline": 0.463,
+    "fix": 0.627
+  },
+  "regressgate": {
+    "verdict": "improvement",
+    "base_rate": 0.4626865671641791,
+    "head_rate": 0.6268656716417911,
+    "delta": 0.16417910447761194,
+    "p_worse": 1.0,
+    "p_better": 9.999000099990002e-05,
+    "cases_compared": 67
+  },
+  "judge_agreement": {
+    "v1": {
+      "checked": 18,
+      "agree": 11
+    },
+    "v2": {
+      "checked": 18,
+      "agree": 11
+    },
+    "v3": {
+      "checked": 18,
+      "agree": 11
+    }
+  },
+  "retrieval_vector_search_top10": {
+    "baseline": {
+      "cases": 56,
+      "recall@1": 0.315,
+      "recall@4": 0.562,
+      "recall@10": 0.938,
+      "mrr@10": 0.513
+    },
+    "candidate-openai-embedder-1000": {
+      "cases": 56,
+      "recall@1": 0.506,
+      "recall@4": 0.792,
+      "recall@10": 0.973,
+      "mrr@10": 0.691
+    },
+    "fix": {
+      "cases": 56,
+      "recall@1": 0.583,
+      "recall@4": 0.842,
+      "recall@10": 0.964,
+      "mrr@10": 0.773
+    },
+    "candidate-openai-embedder (8191-char chunks, confounded)": {
+      "cases": 56,
+      "recall@1": 0.515,
+      "recall@4": 0.75,
+      "recall@10": 1.0,
+      "mrr@10": 0.71
+    }
+  },
+  "context": {
+    "baseline": {
+      "ok_trials": 201,
+      "context_slots": 804,
+      "short_chunk_slots": 99,
+      "short_chunk_share": 0.123,
+      "trials_with_short_chunk": 45,
+      "retrieval_and_app_s": {
+        "p50": 0.27,
+        "p90": 0.52
+      },
+      "llm_s": {
+        "p50": 1.5,
+        "p90": 2.19,
+        "max": 3.22
+      }
+    },
+    "fix": {
+      "ok_trials": 201,
+      "context_slots": 804,
+      "short_chunk_slots": 18,
+      "short_chunk_share": 0.022,
+      "trials_with_short_chunk": 15,
+      "retrieval_and_app_s": {
+        "p50": 0.75,
+        "p90": 2.65
+      },
+      "llm_s": {
+        "p50": 1.5,
+        "p90": 7.83,
+        "max": 56.52
+      }
+    }
+  },
+  "prompt_tokens": {
+    "baseline": 182991,
+    "fix": 210981
+  },
+  "chat_cost_usd_list_price": {
+    "baseline": 0.088,
+    "fix": 0.0996
+  }
+}

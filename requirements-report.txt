@@ -1,0 +1,4 @@
+# Report build only (charts and PDF). The PDF itself is printed by headless Microsoft Edge.
+matplotlib>=3.8   # report/build-report-figures.py
+markdown>=3.5     # report/render-report-pdf.py: Markdown -> HTML
+pypdf>=5          # page-count check of the rendered PDF
