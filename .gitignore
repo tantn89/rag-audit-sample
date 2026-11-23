@@ -1,0 +1,19 @@
+# Secrets and per-launch runtime state (guard token, PIDs, logs)
+.env
+.env.*
+.run/
+
+# Local planning notes and reports
+plans/
+
+# Downloaded corpus and app storage (rebuilt by scripts; may hold tokens or chat history)
+data/
+storage/
+
+# Raw traces from local runs (published results are copied to results/ deliberately)
+traces/
+
+# Python
+__pycache__/
+*.pyc
+.venv/

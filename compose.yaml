@@ -1,0 +1,35 @@
+# AnythingLLM (the audited app), pinned to an exact release and image digest.
+# Chat goes to ShopAIKey only through llm-api-guard on the host (127.0.0.1:18431);
+# the container gets the guard's per-launch local token, never the real provider key.
+# Start with scripts\start-stack.ps1, which starts the guard and sets GUARD_TOKEN.
+name: rag-audit-sample
+
+services:
+  anythingllm:
+    image: mintplexlabs/anythingllm:1.20.0@sha256:3e2b7bc8eb0f73a130fc575f1372bd4e7189e399a63c037497fc183c141fc0ae
+    container_name: rag-audit-anythingllm
+    ports:
+      - "127.0.0.1:3001:3001"   # loopback only
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      STORAGE_DIR: /app/server/storage
+      DISABLE_TELEMETRY: "true"
+      # Chat LLM: OpenAI-compatible endpoint = the local guard
+      LLM_PROVIDER: generic-openai
+      GENERIC_OPEN_AI_BASE_PATH: http://host.docker.internal:18431/v1
+      GENERIC_OPEN_AI_MODEL_PREF: ${CHAT_MODEL:-gpt-4.1-mini}
+      GENERIC_OPEN_AI_MODEL_TOKEN_LIMIT: "32000"
+      GENERIC_OPEN_AI_MAX_TOKENS: "1024"
+      GENERIC_OPEN_AI_API_KEY: ${GUARD_TOKEN:?GUARD_TOKEN must be set by scripts/start-stack.ps1}
+      # The guard buffers whole responses and ShopAIKey keeps SSE streams open, so a streamed
+      # completion never finishes through the guard. Non-streaming calls also report token usage.
+      GENERIC_OPENAI_STREAMING_DISABLED: "true"
+      # Audit scope is document Q&A; the guard would block undeclared tool schemas anyway.
+      PROVIDER_DISABLE_NATIVE_TOOL_CALLING: generic-openai
+      # Baseline embeddings: the app's built-in local embedder (all-MiniLM-L6-v2), no API spend
+      EMBEDDING_ENGINE: native
+      VECTOR_DB: lancedb
+    volumes:
+      - ./storage:/app/server/storage
+    restart: "no"
