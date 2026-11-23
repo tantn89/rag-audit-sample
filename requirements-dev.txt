@@ -1,0 +1,4 @@
+# Grading, reports and tests. The app client and runner themselves are stdlib only.
+regressgate==0.1.0   # repeated-trial comparison and the before/after verdict
+pypdf>=5             # validate-cases --corpus-dir: check evidence quotes against the PDFs
+pytest>=8
