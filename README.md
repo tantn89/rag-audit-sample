@@ -1,89 +1,168 @@
 # rag-audit-sample
 
-**Sample audit on an open-source project.** This is not a client engagement. It shows what a
-"RAG/LLM answer audit" delivers, run end to end on a well-known open-source RAG app and a public
-corpus, with every number reproducible from this repo.
+**Why does a RAG assistant give wrong answers, and which fix is worth making first?**
 
-- **Audited app:** [AnythingLLM](https://github.com/Mintplex-Labs/anything-llm) 1.20.0 (MIT),
-  run unmodified in Docker. Only its settings are changed.
-- **Corpus:** the 2025 FOMC post-meeting statements and meeting minutes (16 PDFs) from the Board of
-  Governors of the Federal Reserve System. They are public domain; source: federalreserve.gov. See
-  [corpus/corpus-manifest.json](corpus/corpus-manifest.json) for URLs and SHA-256 pins.
-- **LLM access:** chat goes through a local allowlisting proxy (`llm-api-guard`) to an
-  OpenAI-compatible provider. The app container only holds a per-launch local token.
+> **Sample audit on an open-source project (AnythingLLM 1.20.0, FOMC 2025 public-domain corpus).
+> Not a client engagement.** It shows what a RAG/LLM answer audit delivers, run end to end on a
+> well-known open-source RAG app, with every number reproducible from this repository.
 
-Status: eval set, runner, grader, baseline and one before/after fix are done (numbers in
-[`results/`](results/)). The written report is in progress.
+The deliverable is a 5-page report, [`report/rag-audit-report.pdf`](report/rag-audit-report.pdf)
+(source: [`report/rag-audit-report.md`](report/rag-audit-report.md)). This README is the case study.
 
-## Layout
+| What was checked | Result | Evidence |
+|---|---|---|
+| Out-of-the-box answer quality, 67 questions × 3 trials | **46.3%** pass, correct and verifiable from the app's own citations | [`results/baseline/summary.json`](results/baseline/summary.json) |
+| One settings change: the built-in local reranker | **62.7%** pass (+16.4 pp); 11 more questions pass in every trial | [`results/fix/summary.json`](results/fix/summary.json) |
+| Is the gain real or noise? | regressgate **IMPROVEMENT**, p(better) 0.0001; no significant per-question drop | [`results/compare-baseline-vs-fix.md`](results/compare-baseline-vs-fix.md) |
+| Expected document in the top 4 chunks (what the model sees) | 0.562 → **0.842** with the reranker; 0.792 with a paid embedder swap | `results/*/summary.json` → `retrieval` |
+| Main root cause | the wrong meeting's chunks retrieved: **78 of 201** baseline trials | `failures_primary` in the baseline summary |
+| Cost of the whole audit | about **$0.43** of LLM calls at list prices | [docs/methodology.md](docs/methodology.md#disclosures) |
 
-| Path | What it is |
-|------|------------|
-| `compose.yaml` | AnythingLLM pinned to `1.20.0@sha256:…`, loopback port 3001, local embedder |
-| `scripts/start-guard.ps1` / `stop-guard.ps1` | Start or stop the local guard; the token goes to `.run/` (git-ignored) |
-| `scripts/start-stack.ps1` / `stop-stack.ps1` | Guard plus app up or down (`-Embedder openai` adds `compose.embedder-openai.yaml`) |
-| `scripts/download-corpus.py` | Downloads the corpus and fails on any SHA-256 mismatch |
-| `scripts/anythingllm-client.py` | Creates the workspace, ingests files, asks one question and saves a JSON trace |
-| `evals/cases.jsonl` | The eval set: 67 questions with key facts, refusal flags, expected source documents and page-cited evidence |
-| `rag_audit/` | Runner, deterministic grader, groundedness judge and reports (`python -m rag_audit --help`) |
-| `results/<config>/` | Per-config summary, per-trial grades, regressgate report, judge verdicts and packed traces |
-| `results/compare-*.md` | regressgate before/after verdict |
-| `results/candidate-*/` | The two fix candidates compared before choosing the fix (reranker pilot, embedder swap) |
+---
 
-## Reproduce the numbers
+## The problem
 
-From committed traces, with no app and no LLM calls:
+A team ships a "chat with your documents" assistant. Users report confident wrong answers, but no
+one can say how often, why, or which fix to try first. Here the assistant is AnythingLLM with its
+default settings, over the 16 FOMC statements and minutes of 2025. The corpus is a hard, realistic
+case: eight meetings in nearly identical language, numbers written as "4-1/4" or "4¼", and
+questions that depend on dates.
 
-```powershell
-python -m venv .venv; .venv\Scripts\pip install -r requirements-dev.txt
-.venv\Scripts\python -m rag_audit reproduce          # re-grades baseline and fix, re-runs the gate
-.venv\Scripts\regressgate compare results\baseline\regressgate-report.json results\fix\regressgate-report.json
-.venv\Scripts\python -m pytest -q
+## Setup
+
+```mermaid
+flowchart LR
+    Q[(evals/cases.jsonl<br/>67 questions,<br/>page-cited answers)] --> R[rag_audit runner<br/>3 trials per question<br/>timeouts and budget]
+    R -->|/chat, /vector-search| A[AnythingLLM 1.20.0<br/>Docker, unmodified<br/>settings only]
+    C[(FOMC 2025<br/>16 PDFs, SHA-256 pinned)] --> A
+    A -->|local token only| G[llm-api-guard<br/>allowlisting proxy]
+    G --> L[gpt-4.1-mini<br/>OpenAI-compatible]
+    R --> T[(traces<br/>chunks, answer,<br/>latency, tokens)]
+    T --> D[deterministic grader<br/>facts, refusals, citations]
+    T --> J[LLM judge<br/>labels causes only]
+    D --> S[results/ summaries]
+    J --> S
+    S --> RG[regressgate<br/>before/after verdict]
+    S --> P[report/ charts and PDF]
 ```
 
-Full live re-run (stack running, see Quick start; spends about $0.3 at list prices). Move or
-delete `traces\` first; otherwise saved trials are skipped and the run resumes:
+- **App:** AnythingLLM 1.20.0 (MIT), pinned by image digest, loopback only. Its code is never
+  changed, so every fix is a setting a client can apply.
+- **LLM access:** the app holds only a per-launch local token for `llm-api-guard`, which injects the
+  real provider key and blocks anything off the allowlist.
+- **Grading:** deterministic checks decide pass or fail; the LLM judge only labels why a failed
+  answer went wrong. See [docs/grader-design.md](docs/grader-design.md).
+
+## Headline results
+
+| Category | Questions | Baseline | Fix (rerank) |
+|---|---|---|---|
+| Fact | 16 | 25.0% | 47.9% |
+| Numeric | 16 | 68.8% | 93.8% |
+| Multi-hop | 11 | 0.0% | 18.2% |
+| Statement vs minutes | 7 | 57.1% | 71.4% |
+| Date-sensitive | 7 | 38.1% | 42.9% |
+| Refusal | 10 | 93.3% | 93.3% |
+| **All (mean per question)** | **67** | **46.3%** | **62.7%** |
+
+Retrieval on the 56 answerable questions (`/vector-search` top 10, same 1000-character chunks):
+
+| Configuration | Recall@1 | Recall@4 | Recall@10 | MRR@10 |
+|---|---|---|---|---|
+| Baseline, local MiniLM embedder | 0.315 | 0.562 | 0.938 | 0.513 |
+| Embedder swap, text-embedding-3-small | 0.506 | 0.792 | 0.973 | 0.691 |
+| **Fix, local reranker** | **0.583** | **0.842** | 0.964 | **0.773** |
+
+## Top issues found
+
+1. **Retrieval returns the wrong meeting's chunks** (78 of 201 baseline trials). Asked for the
+   September 2025 range, the app retrieved July and October chunks and answered July's
+   "4¼ to 4½ percent", 3 of 3 times.
+2. **Confident answers about a meeting the context does not cover** (judge flag on 38 failed
+   trials). Asked who dissented in July, it named the March dissenter with his March reason.
+3. **Right document, wrong chunk** (21 trials): the attendance chunk instead of the vote, so "no
+   member dissented" when one did.
+4. **Near-empty cover pages fill the context:** 99 of 804 context slots (12.3%), concentrated on date
+   questions, which then get invented dates.
+5. **The upload timestamp and "today" leak into answers:** "published on November 23, 2026" is the
+   ingestion date the app writes into every chunk header.
+
+Trace excerpts (chunk ids, documents, scores) for each issue are in section 5 of the report.
+
+## The fix
+
+`vectorSearchMode: rerank`, one workspace setting. AnythingLLM's built-in local cross-encoder
+re-scores the nearest chunks and keeps the top 4. It was chosen over an embedder swap because it
+puts the right document in front of the model more often (recall@4 0.842 against 0.792), needs no
+re-ingest and no API spend, and keeps the documents on the machine.
+
+Side effects, reported rather than hidden:
+- the September minutes cover chunk, which holds only the upload timestamp, now ranks first for
+  one date question, so that answer is wrong in 3 of 3 trials (2 of 3 passed before; not
+  significant, but the cause is clear);
+- citation mismatches rose from 3 to 8 (right document, wrong page);
+- about 15% more prompt tokens, and slower retrieval because the reranker runs on CPU (median
+  0.75 s against 0.27 s; end-to-end latency is indicative only, see the report).
+
+The ranked fix plan (date-aware metadata, prompt changes, dropping cover pages at ingest, a larger
+topN for multi-hop, a stronger judge) is section 7 of the report.
+
+## Reproduce
+
+From the committed traces, with no app and no LLM calls (Windows PowerShell; Python 3.11+):
 
 ```powershell
-.venv\Scripts\python -m rag_audit full-rerun --configs baseline fix --budget-usd 3
+python -m venv .venv; .venv\Scripts\pip install -r requirements-dev.txt -r requirements-report.txt
+.venv\Scripts\python -m rag_audit reproduce          # re-grade baseline and fix, re-run regressgate
+.venv\Scripts\python -m pytest -q                    # 46 tests + 32 subtests
+.venv\Scripts\python report\build-report-figures.py  # charts and derived numbers
+.venv\Scripts\python report\render-report-pdf.py     # the PDF, via headless Microsoft Edge
 ```
 
-## How answers are graded
-
-- **Deterministic first.** Each case lists key facts (`must_include`, numbers compared by
-  value after normalising "4-1/4", "4¼", "4.25%"), rate ranges, forbidden terms, and the
-  documents that hold the answer. A pass needs the facts in the answer *and* in the chunks the
-  app retrieved from those documents, so the answer is verifiable from its citations.
-- **Refusals.** Out-of-corpus questions pass only when the answer declines in its first two
-  sentences and states none of the forbidden values.
-- **LLM judge only where needed.** Failed answers that did not refuse get a groundedness verdict
-  from the same guarded model (cached in `results/<config>/judge-verdicts.jsonl`). It labels a
-  failure as an unsupported claim; it never changes pass or fail. A manual spot check of 18
-  judged trials (`results/judge-spot-check.jsonl`) agreed with the judge on 11 (61%) for each of
-  three prompt versions: gpt-4.1-mini tends to accept a fact that is true of a different meeting
-  than the one the answer names. Treat the unsupported-claim label as indicative only.
-- **Repeated trials.** 3 trials per case per config. regressgate compares configs with a
-  permutation test and per-case Fisher tests. Latency is reported apart from quality: a trial
-  that times out after its retry is excluded from the pass rate and counted separately;
-  `run --retry-timeouts` gives such trials one more bounded pass, keeping the timed-out attempts
-  in the trace.
-
-## Quick start (Windows, Docker Desktop)
+A full live re-run needs Docker Desktop, the corpus and an OpenAI-compatible endpoint behind
+`llm-api-guard` (about $0.30 at list prices). Move `traces\` aside first, or saved trials are
+skipped:
 
 ```powershell
-python scripts\download-corpus.py
-scripts\start-stack.ps1   # first run also creates an app API key in .run\ (git-ignored)
+python scripts\download-corpus.py          # 16 PDFs, fails on any SHA-256 mismatch
+scripts\start-stack.ps1                    # guard + app; first run creates an app API key in .run\
 python scripts\anythingllm-client.py workspace --slug fomc-2025
 python scripts\anythingllm-client.py ingest --slug fomc-2025 (Get-ChildItem data\corpus\*.pdf).FullName
-python scripts\anythingllm-client.py ask --slug fomc-2025 "What target range did the FOMC set in September 2025?"
+.venv\Scripts\python -m rag_audit full-rerun --configs baseline fix --budget-usd 3
 scripts\stop-stack.ps1
 ```
 
-Requirements: Docker Desktop, Python 3.11+ (stdlib only), and the
-`llm-api-guard` proxy with access to an OpenAI-compatible provider. To use a different
-OpenAI-compatible endpoint, edit `GENERIC_OPEN_AI_BASE_PATH` in `compose.yaml`.
+`python -m rag_audit --help` lists every step (`apply-config`, `retrieval`, `run`, `judge`, `pack`,
+`report`, `compare`, `reembed`). The embedder candidate uses `scripts\start-stack.ps1 -Embedder
+openai` followed by `python -m rag_audit reembed`.
 
-## Licences
+| Path | What it is |
+|---|---|
+| `evals/cases.jsonl` | the eval set ([docs/eval-set-design.md](docs/eval-set-design.md)) |
+| `rag_audit/` | runner, grader, judge and reports |
+| `results/<config>/` | summary, per-trial grades, regressgate report, judge verdicts, packed traces |
+| `report/` | report source, PDF, charts and their build scripts |
+| `compose.yaml`, `compose.embedder-openai.yaml`, `scripts/` | the pinned app and the stack scripts |
+| `docs/` | [methodology](docs/methodology.md), [eval-set design](docs/eval-set-design.md), [grader design](docs/grader-design.md) |
 
-The code in this repo is under the MIT licence. AnythingLLM is MIT-licensed by Mintplex Labs.
-The corpus documents are US Federal Reserve Board publications in the public domain.
+## Limitations
+
+- One corpus, one chat model and 67 questions written by the auditor rather than taken from user
+  logs. The numbers describe this setup, not AnythingLLM in general.
+- 3 trials per question detect large changes, not small per-question ones.
+- The LLM judge agreed with manual labels on 11 of 18 trials (61%), so unsupported-claim counts are
+  indicative; pass and fail never depend on it.
+- The grader was refined after reading the baseline traces. Every change applies to both
+  configurations, which were re-graded with `reproduce` ([details](docs/methodology.md#disclosures)).
+- Latency is confounded by a provider slowdown during the fix run; costs are estimates at OpenAI
+  list prices.
+- Only the reranker went through the full 3-trial run; the embedder swap was compared on retrieval.
+
+## Licence and corpus attribution
+
+Code: MIT ([LICENSE](LICENSE)). AnythingLLM is MIT-licensed by Mintplex Labs and is used unmodified.
+
+The corpus is the 2025 FOMC post-meeting statements and minutes, publications of the Board of
+Governors of the Federal Reserve System, which are in the public domain. **Source: Board of
+Governors of the Federal Reserve System.** URLs and SHA-256 pins are in
+[`corpus/corpus-manifest.json`](corpus/corpus-manifest.json); the PDFs are downloaded, not committed.
