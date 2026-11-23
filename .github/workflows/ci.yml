@@ -1,0 +1,26 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-dev.txt
+      - run: python -m pytest -q
+      # Re-grade every committed trace bundle offline and fail if any published number moved.
+      - run: python -m rag_audit reproduce
+      - name: Published numbers unchanged (timestamps aside)
+        run: |
+          changed=$(git diff -U0 -- results | grep -E '^[+-][^+-]' | grep -vE '(generated_at|created_at|timestamp)' || true)
+          if [ -n "$changed" ]; then echo "$changed"; exit 1; fi
