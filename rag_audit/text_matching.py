@@ -31,17 +31,22 @@ _SENTENCE_END = re.compile(r"(?<=[.!?])\s+(?=[A-Z0-9\"'(])")
 # initials (H. in "Jerome H. Powell") and a few titles.
 _ABBREVIATION = re.compile(r"\b(?:[A-Za-z]\.){2,}|\b[A-Z]\.(?=\s)|\b(?:Mr|Mrs|Ms|Dr|St|No|vs)\.")
 _DOT = "․"  # placeholder while splitting
+# A numbered-list marker at the start of a line ("1. ", "2) "). Only 1-2 digits, so a year that
+# ends a sentence at a line start ("2025. The Committee") is not taken for one.
+_LIST_MARKER = re.compile(r"(?m)^[ \t]*\d{1,2}[.)][ \t]+")
+# An optional softener between "not" and the verb: "is not directly provided".
+_SOFT = r"(?:directly |explicitly |specifically |clearly |fully |actually )?"
 
 # Phrases that decline to answer from the documents. Matched in the answer's lead only, so a
 # caveat at the end of a real answer is not a refusal.
 REFUSAL_PATTERNS = [re.compile(p) for p in (
     r"\bno relevant information\b",
-    r"\b(?:do|does|did) not (?:contain|include|mention|provide|specify|state|cover|have|address|"
-    r"discuss|indicate|say|reference|give|report|list|detail)",
-    r"\b(?:don't|doesn't|didn't) (?:contain|include|mention|provide|specify|state|cover|have|"
-    r"address|discuss|indicate|say|reference|give|report)",
-    r"\bnot (?:available|specified|mentioned|provided|included|stated|found|covered|addressed|"
-    r"discussed|given|reported|contained|detailed|present)\b",
+    rf"\b(?:do|does|did) not {_SOFT}(?:contain|include|mention|provide|specify|state|cover|have|"
+    r"address|discuss|indicate|say|reference|give|report|list|detail)",
+    rf"\b(?:don't|doesn't|didn't) {_SOFT}(?:contain|include|mention|provide|specify|state|cover|"
+    r"have|address|discuss|indicate|say|reference|give|report)",
+    rf"\bnot {_SOFT}(?:available|specified|mentioned|provided|included|stated|found|covered|"
+    r"addressed|discussed|given|reported|contained|detailed|present)\b",
     r"\b(?:cannot|can't|can not|unable to|not able to) (?:find|answer|determine|provide|confirm|"
     r"identify|locate|say)",
     r"\bno (?:information|details|data|mention|record|reference|specific)\b",
@@ -54,9 +59,29 @@ REFUSAL_PATTERNS = [re.compile(p) for p in (
     r"\bi (?:do not|don't) (?:know|have)\b",
 )]
 
+# Hedged estimates. For a question the documents cannot answer, an answer that declines and then
+# guesses ("it can be inferred that ... was likely around 2 percent") still states invented
+# content, so these fail a refusal case wherever they appear in the answer.
+SPECULATION_PATTERNS = [re.compile(p) for p in (
+    r"\bcan be (?:inferred|deduced|estimated)\b",
+    r"\b(?:it is|it's) (?:likely|probable|reasonable to assume)\b",
+    r"\b(?:was|were|is|are|would be|will be) (?:likely|probably|presumably)\b",
+    r"\b(?:likely|probably|presumably) (?:around|about|near|close to|to be|projected)\b",
+    r"\b(?:best|rough|educated) (?:estimate|guess)\b",
+)]
+
 
 def _fmt(value: float) -> str:
     return f"{value:.4f}".rstrip("0").rstrip(".")
+
+
+def _mixed(m: re.Match) -> str:
+    # "4 1/0" is not a fraction: leave it as written instead of dividing by zero
+    return m[0] if int(m[3]) == 0 else _fmt(int(m[1]) + int(m[2]) / int(m[3]))
+
+
+def _fraction(m: re.Match) -> str:
+    return m[0] if int(m[2]) == 0 else _fmt(int(m[1]) / int(m[2]))
 
 
 def normalize(text: str | None) -> str:
@@ -68,14 +93,25 @@ def normalize(text: str | None) -> str:
     t = t.translate(_DASHES).translate(_QUOTES).lower()
     t = _THOUSANDS.sub("", t)
     t = t.replace("%", " percent")
-    t = _MIXED.sub(lambda m: _fmt(int(m[1]) + int(m[2]) / int(m[3])), t)
-    t = _FRACTION.sub(lambda m: _fmt(int(m[1]) / int(m[2])), t)
+    t = _MIXED.sub(_mixed, t)
+    t = _FRACTION.sub(_fraction, t)
     return re.sub(r"\s+", " ", t).strip()
 
 
 def strip_chunk_metadata(text: str | None) -> str:
     """Drop AnythingLLM's <document_metadata> header (it carries the ingestion date)."""
     return _METADATA.sub(" ", text or "")
+
+
+def strip_list_markers(text: str | None) -> str:
+    """Drop numbered-list markers so "3. On December 10" does not count as the number 3."""
+    return _LIST_MARKER.sub("", text or "")
+
+
+def speculation_in(text: str | None) -> list[str]:
+    """Hedged-estimate phrases anywhere in the text (see SPECULATION_PATTERNS)."""
+    norm = normalize(text)
+    return [m[0] for p in SPECULATION_PATTERNS for m in [p.search(norm)] if m]
 
 
 def numbers_in(norm: str) -> list[float]:

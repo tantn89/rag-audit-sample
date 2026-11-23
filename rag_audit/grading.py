@@ -1,19 +1,23 @@
 """Grade one trial deterministically and label why it failed.
 
 Pass rules
-- Answerable case: every `must_include` group and `ranges` pair is in the answer, nothing from
-  `must_not_include` is, and the retrieved chunks (the app's citations) from the expected
-  documents contain the case's context facts, so a reader could verify the answer from what
-  the app showed.
-- Refusal case: the answer declines within its first two sentences and states nothing from
-  `must_not_include`.
+- Answerable case: every `must_include` group and `ranges` pair is in the answer (numbered-list
+  markers are ignored), nothing from `must_not_include` is, and the retrieved chunks (the app's
+  citations) from the expected documents contain the case's context facts, so a reader could
+  verify the answer from what the app showed. When `expected_docs` has several groups (one per
+  meeting a multi-hop question needs), the chunks of every group must also hold at least one of
+  those facts: one meeting's evidence cannot stand in for the others.
+- Refusal case: the answer declines within its first two sentences, states nothing from
+  `must_not_include` (the invented specifics a fabricated answer would give) and does not go on
+  to guess (SPECULATION_PATTERNS, anywhere in the answer).
 
 Failure taxonomy (one primary label per failed trial, in pipeline order, plus flags):
   format_tool_error   the app returned an error, an empty answer or a non-text response
   missing_refusal     an out-of-corpus question was answered instead of declined
-  citation_mismatch   the answer is right but no retrieved chunk supports it
+  citation_mismatch   the answer is right and every expected document was retrieved, but the
+                      retrieved chunks do not support it
   retrieval_miss      an expected document (for multi-hop: any of them) is absent from the
-                      retrieved chunks
+                      retrieved chunks, whether or not the answer happened to be right
   wrong_chunk_first   the expected documents were retrieved, but not the chunk with the facts
   unsupported_claim   the context had the facts; the answer asserts something else (judge)
   answer_incomplete   the context had the facts; the answer left them out or refused
@@ -33,7 +37,9 @@ from rag_audit.text_matching import (
     is_refusal,
     normalize,
     range_in,
+    speculation_in,
     strip_chunk_metadata,
+    strip_list_markers,
     term_in,
 )
 
@@ -83,6 +89,27 @@ def missing_facts(norm: str, groups: list[list[str]], ranges: list[list[float]])
     return missing
 
 
+def _context(sources: list[dict], docs: set[str]) -> str:
+    return normalize(" ".join(strip_chunk_metadata(s.get("text")) for s in sources
+                              if source_doc(s) in docs))
+
+
+def context_support(case: EvalCase, sources: list[dict]) -> bool:
+    """The case's context facts are in the chunks from its expected documents, and, for a
+    question that needs several meetings, each meeting's chunks hold at least one of them."""
+    wanted = {d for group in case.expected_docs for d in group}
+    if missing_facts(_context(sources, wanted), case.context_terms, case.context_ranges):
+        return False
+    if len(case.expected_docs) < 2:
+        return True
+    for group in case.expected_docs:
+        ctx = _context(sources, set(group))
+        if not (any(group_in(ctx, g) for g in case.context_terms)
+                or any(range_in(ctx, lo, hi) for lo, hi in case.context_ranges)):
+            return False
+    return True
+
+
 def grade_trial(case: EvalCase, trace: dict, judge: dict | None = None) -> TrialGrade:
     """`judge` is the cached groundedness verdict for this trial, if one was requested."""
     g = TrialGrade(case.id, int(trace.get("trial", 0)), trace.get("status", "ok"), None)
@@ -95,34 +122,38 @@ def grade_trial(case: EvalCase, trace: dict, judge: dict | None = None) -> Trial
         g.status, g.passed, g.failure = "error", False, "format_tool_error"
         return g
 
-    norm = normalize(answer)
+    norm = normalize(strip_list_markers(answer))
     sources = ranked_sources(trace)
-    # Support must come from the expected documents: the same name or number in another
-    # meeting's chunk (an attendance list, an older range) does not back the answer.
-    wanted = {d for group in case.expected_docs for d in group}
-    ctx = normalize(" ".join(strip_chunk_metadata(s.get("text")) for s in sources
-                             if source_doc(s) in wanted))
     g.refused = is_refusal(answer)
     g.forbidden_hits = [t for t in case.must_not_include if term_in(norm, t)]
     g.doc_recall = doc_group_recall(case.expected_docs, [source_doc(s) for s in sources])
 
     if case.must_refuse:
+        # Declining in the lead is not enough: going on to assert invented specifics or to guess
+        # an estimate is still an answer to a question the documents cannot answer.
+        g.forbidden_hits += [f"speculation: {s}" for s in speculation_in(answer)]
         g.passed = g.refused and not g.forbidden_hits
         if not g.passed:
             g.failure = "missing_refusal"
             g.needs_judge = not g.refused
+            if g.refused:
+                g.flags.append("refused_then_asserted")
         return g
 
     g.missing = missing_facts(norm, case.must_include, case.ranges)
     # An answer that opens by declining is not a correct answer, even if a matching number
     # appears later (e.g. "the May minutes do not give March's figure; May's was 2.6 percent").
     g.facts_ok = not g.missing and not g.forbidden_hits and (not g.refused or case.allow_caveat)
-    g.context_supported = not missing_facts(ctx, case.context_terms, case.context_ranges)
+    # Support must come from the expected documents: the same name or number in another
+    # meeting's chunk (an attendance list, an older range) does not back the answer.
+    g.context_supported = context_support(case, sources)
     g.passed = g.facts_ok and g.context_supported
     if g.passed:
         return g
     if g.facts_ok:
-        g.failure = "citation_mismatch"
+        # A right answer without support is a citation problem only when every expected
+        # document reached the model; otherwise retrieval is the cause.
+        g.failure = "citation_mismatch" if (g.doc_recall or 0) >= 1 else "retrieval_miss"
         return g
 
     g.needs_judge = not g.refused

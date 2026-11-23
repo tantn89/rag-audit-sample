@@ -9,7 +9,9 @@ from rag_audit.text_matching import (
     normalize,
     numbers_in,
     range_in,
+    speculation_in,
     strip_chunk_metadata,
+    strip_list_markers,
     term_in,
 )
 
@@ -25,6 +27,19 @@ from rag_audit.text_matching import (
 ])
 def test_normalize_rates_fractions_and_symbols(raw, expected):
     assert normalize(raw) == expected
+
+
+@pytest.mark.parametrize("raw", ["1/0", "4 1/0", "4-0/0 percent"])
+def test_normalize_leaves_zero_denominators_as_written(raw):
+    assert normalize(raw) == raw.lower()
+
+
+def test_strip_list_markers_drops_numbered_items_only():
+    listed = "Two cuts:\n1. October\n2) December\n  3. Later"
+    assert strip_list_markers(listed) == "Two cuts:\nOctober\nDecember\nLater"
+    # a year ending a sentence at the start of a wrapped line is not a list marker
+    assert strip_list_markers("on December 1,\n2025. The Committee") == "on December 1,\n2025. The Committee"
+    assert numbers_in(normalize(strip_list_markers("1. 4.4 percent"))) == [4.4]
 
 
 def test_normalize_leaves_dates_and_phone_numbers_alone():
@@ -72,9 +87,26 @@ def test_range_detection(text, low, high, found):
     "This is not in the provided documents.",
     "I cannot find any information about January 2026 decisions.",
     "The minutes say the Bank of Japan increased its policy rate. The exact level is not specified.",
+    # softened phrasings
+    "The June 2026 Summary of Economic Projections is not directly provided in the context.",
+    "The documents do not explicitly state the RBI's repo rate.",
+    "The vote count is not specifically mentioned in the minutes.",
+    "The minutes doesn't directly mention Bitcoin.",
 ])
 def test_refusals_are_detected_in_the_lead(answer):
     assert is_refusal(answer)
+
+
+@pytest.mark.parametrize("answer, hit", [
+    ("It can be inferred that the median was about 2.5 percent.", True),
+    ("The rate was likely projected around 2 percent.", True),
+    ("It is likely that inflation stayed high.", True),
+    ("My best estimate is 4 percent.", True),
+    ("The documents do not include the ECB's rate.", False),
+    ("You will likely need another source.", False),  # advice, not an estimate
+])
+def test_speculation_is_detected_anywhere(answer, hit):
+    assert bool(speculation_in(answer)) is hit
 
 
 def test_lead_does_not_split_on_abbreviations_or_initials():
