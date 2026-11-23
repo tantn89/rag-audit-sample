@@ -23,7 +23,11 @@ import matplotlib  # noqa: E402
 matplotlib.use("Agg")  # headless: no display needed
 import matplotlib.pyplot as plt  # noqa: E402
 
-from rag_audit.trace_store import RESULTS, load_bundle  # noqa: E402
+from rag_audit.groundedness_judge import judge_cost, verdicts_path  # noqa: E402
+from rag_audit.trace_store import RESULTS, load_bundle, trace_cost  # noqa: E402
+
+CHAT_CONFIGS = ("baseline", "candidate-rerank", "fix")  # every config that made chat calls
+JUDGED_CONFIGS = ("baseline", "fix")
 
 FIGURES = ROOT / "report" / "figures"
 NUMBERS = ROOT / "report" / "report-numbers.json"
@@ -79,6 +83,36 @@ def context_stats(config: str) -> dict:
         "retrieval_and_app_s": {"p50": pct(non_llm, 50), "p90": pct(non_llm, 90)},
         "llm_s": {"p50": pct(llm, 50), "p90": pct(llm, 90), "max": round(max(llm), 2) if llm else None},
     }
+
+
+def logged_cost() -> dict:
+    """Spend that the committed results record, at list prices, and what they cannot meter.
+
+    Chat: token usage of every successful chat trace in the bundles. Judge: token usage of every
+    verdict row (all prompt versions). A timed-out attempt has no usage (the client gave up), and
+    embedding calls are not traced, so both are counted but not priced.
+    """
+    chat = {c: 0.0 for c in CHAT_CONFIGS}
+    chat_calls = timed_out = max_attempts = 0
+    for config in CHAT_CONFIGS:
+        chats, _ = load_bundle(config)
+        for t in chats:
+            attempts = t.get("attempts") or []
+            max_attempts = max(max_attempts, len(attempts))
+            timed_out += sum(bool(a.get("timeout")) for a in attempts)
+            if t.get("status") == "ok":
+                chat[config] += trace_cost(t)
+                chat_calls += 1
+    judge = {c: judge_cost(c) for c in JUDGED_CONFIGS}
+    judge_calls = sum(len(verdicts_path(c).read_text(encoding="utf-8").splitlines())
+                      for c in JUDGED_CONFIGS)
+    total = sum(chat.values()) + sum(judge.values())
+    return {"chat_usd": {k: round(v, 4) for k, v in chat.items()},
+            "judge_usd": {k: round(v, 4) for k, v in judge.items()},
+            "total_usd": round(total, 3), "metered_chat_calls": chat_calls,
+            "metered_judge_calls": judge_calls, "unmetered_timed_out_attempts": timed_out,
+            "max_billed_attempts_per_trial": max_attempts,
+            "not_metered": "timed-out chat attempts and embedding calls"}
 
 
 def style(ax) -> None:
@@ -194,10 +228,17 @@ def main() -> int:
     numbers = {
         "source": "built by report/build-report-figures.py from results/",
         "pass_rate": {"baseline": base["pass_rate"], "fix": fix["pass_rate"]},
+        "pass_rate_by_category": {c: {"baseline": base["by_category"][c]["pass_rate"],
+                                      "fix": fix["by_category"][c]["pass_rate"]} for c in CATEGORIES},
         "regressgate": {k: gate[k] for k in ("verdict", "base_rate", "head_rate", "delta",
-                                             "p_worse", "p_better", "cases_compared")},
+                                             "p_worse", "p_better", "permutations",
+                                             "cases_compared")},
+        "question_level": gate["question_level"],
         "judge_agreement": {v: {k: gate["judge_agreement"][v][k] for k in ("checked", "agree")}
                             for v in gate["judge_agreement"]},
+        "judge_needed_without_verdict": {"baseline": base["judge"]["needed_without_verdict"],
+                                         "fix": fix["judge"]["needed_without_verdict"]},
+        "audit_cost_logged": logged_cost(),
         "retrieval_vector_search_top10": recall,
         "context": {"baseline": context_stats("baseline"), "fix": context_stats("fix")},
         "prompt_tokens": {"baseline": base["tokens"]["prompt"], "fix": fix["tokens"]["prompt"]},

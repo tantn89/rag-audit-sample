@@ -19,9 +19,12 @@ minutes' publication date is not stated in the minutes themselves).
 
 ## Fields per question
 
-- `must_include`: groups of alternatives; every group needs one match ("1/4" or "25 basis").
+- `must_include`: groups of alternatives; every group needs one match ("1/4" or "25 basis"). Small
+  numbers and common words are written as phrases ("5 billion", "three times", "may 2025").
 - `ranges`: rate ranges as `[low, high]`, matched in any spelling ("3½ to 3¾", "3.50%-3.75%").
 - `must_not_include`: values that fail the answer on sight, such as "2026" or the upload date.
+  Every must-refuse question lists the invented specifics a fabricated answer would give (a rate,
+  a vote count, a name, a dollar amount, "2026 minutes" content).
 - `ctx_terms`: optional; the facts the retrieved chunks must hold when they differ from the
   answer's wording. Defaults to `must_include` and `ranges`.
 - `expected_docs`: groups of documents that hold the answer. A multi-hop question has one group
@@ -47,5 +50,6 @@ All quotes are found (`data\corpus` is filled by `python scripts\download-corpus
 - Categories are sized for the failure modes the corpus invites (many similar meetings, numbers in
   several spellings, dates), not for user-traffic frequency. The overall pass rate is a mean per
   question across categories, so read it next to the per-category table.
-- Case fixes made after reading the baseline traces are listed in
-  [methodology.md](methodology.md#disclosures).
+- Every case change made after reading the baseline traces is listed by case id in
+  [methodology.md](methodology.md#post-baseline-changes-to-the-grader-and-the-cases).
+- The same 67 questions were used to choose the fix and to measure it; there is no held-out set.

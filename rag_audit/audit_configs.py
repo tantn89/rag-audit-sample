@@ -34,9 +34,9 @@ BASELINE = AuditConfig(
                "openAiPrompt": DEFAULT_PROMPT},
 )
 
-# Fix candidates, each one setting away from the baseline, compared on retrieval before one is
-# chosen as the fix: the reranker with a 1-trial chat pilot (context recall from /chat sources),
-# the embedder with the /vector-search probe. Both endpoints honour the workspace search mode.
+# Fix candidates, each one setting away from the baseline. The reranker was piloted with 1 chat
+# trial on all 67 questions (context recall from /chat sources), the embedder with the
+# /vector-search probe. Both endpoints honour the workspace search mode.
 CANDIDATE_RERANK = AuditConfig(
     name="candidate-rerank",
     description="Baseline plus vectorSearchMode=rerank (AnythingLLM's built-in local reranker "
@@ -55,6 +55,7 @@ CANDIDATE_EMBEDDER = AuditConfig(
 )
 # The same embedder swap with the chunk size held at the baseline's 1000 characters, so only the
 # embedder changes. Retrieval-only (/vector-search), directly comparable with the fix's probe.
+# Measured after the fix run, as a check on the choice, not as part of it.
 CANDIDATE_EMBEDDER_1000 = AuditConfig(
     name="candidate-openai-embedder-1000",
     description="Baseline workspace settings with the embedder switched to text-embedding-3-small "
@@ -64,10 +65,11 @@ CANDIDATE_EMBEDDER_1000 = AuditConfig(
     embedder="text-embedding-3-small via llm-api-guard (1000-char chunks, 20 overlap)",
 )
 
-# The chosen fix: the reranker raised context doc recall@4 from 0.57 to 0.84 in the 1-trial
-# pilot, against 0.75 for the embedder swap (measured with larger chunks, which favour it), with no
-# re-ingest, no API spend and no corpus
-# leaving the machine. One workspace setting changes; everything else equals the baseline.
+# The chosen fix: in the 1-trial pilot on the same 67 questions the reranker raised context doc
+# recall@4 from 0.56 to 0.84, against 0.75 for the embedder probe at 8191-char chunks (two
+# changes at once), with no re-ingest, no API spend and no corpus leaving the machine. The
+# embedder re-measured at 1000-char chunks after the fix run reached 0.79. One workspace setting
+# changes; everything else equals the baseline.
 FIX = AuditConfig(
     name="fix",
     description="Baseline plus vectorSearchMode=rerank (one workspace setting).",

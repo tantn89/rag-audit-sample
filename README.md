@@ -11,12 +11,12 @@ The deliverable is a 5-page report, [`report/rag-audit-report.pdf`](report/rag-a
 
 | What was checked | Result | Evidence |
 |---|---|---|
-| Out-of-the-box answer quality, 67 questions × 3 trials | **46.3%** pass, correct and verifiable from the app's own citations | [`results/baseline/summary.json`](results/baseline/summary.json) |
-| One settings change: the built-in local reranker | **62.7%** pass (+16.4 pp); 11 more questions pass in every trial | [`results/fix/summary.json`](results/fix/summary.json) |
-| Is the gain real or noise? | regressgate **IMPROVEMENT**, p(better) 0.0001; no significant per-question drop | [`results/compare-baseline-vs-fix.md`](results/compare-baseline-vs-fix.md) |
+| Out-of-the-box answer quality, 67 questions × 3 trials | **44.8%** pass, correct and verifiable from the app's own citations | [`results/baseline/summary.json`](results/baseline/summary.json) |
+| One settings change: the built-in local reranker | **62.7%** pass (+17.9 pp); 13 more questions pass in every trial | [`results/fix/summary.json`](results/fix/summary.json) |
+| Is the gain beyond run-to-run noise? | regressgate **IMPROVEMENT**, p < 0.001 (10,000 shuffles). Per question: 15 up, 1 down, sign test p = 0.0003, bootstrap 95% CI +9.0 to +27.9 pp | [`results/compare-baseline-vs-fix.md`](results/compare-baseline-vs-fix.md) |
 | Expected document in the top 4 chunks (what the model sees) | 0.562 → **0.842** with the reranker; 0.792 with a paid embedder swap | `results/*/summary.json` → `retrieval` |
-| Main root cause | the wrong meeting's chunks retrieved: **78 of 201** baseline trials | `failures_primary` in the baseline summary |
-| Cost of the whole audit | about **$0.43** of LLM calls at list prices | [docs/methodology.md](docs/methodology.md#disclosures) |
+| Main root cause | an expected document never retrieved: **81 of 201** baseline trials | `failures_primary` in the baseline summary |
+| Cost of the whole audit | **≈$0.39** logged at list prices; timed-out calls unmetered | [docs/methodology.md](docs/methodology.md#the-judge-latency-cost-and-the-index) |
 
 ---
 
@@ -48,8 +48,9 @@ flowchart LR
 
 - **App:** AnythingLLM 1.20.0 (MIT), pinned by image digest, loopback only. Its code is never
   changed, so every fix is a setting a client can apply.
-- **LLM access:** the app holds only a per-launch local token for `llm-api-guard`, which injects the
-  real provider key and blocks anything off the allowlist.
+- **LLM access:** the app holds only a per-launch local token for `llm-api-guard`, the author's own
+  local allowlisting proxy (not published here). It injects the real key of an OpenAI-compatible
+  endpoint and blocks anything off the allowlist. `gpt-4.1-mini` is the configured model preference.
 - **Grading:** deterministic checks decide pass or fail; the LLM judge only labels why a failed
   answer went wrong. See [docs/grader-design.md](docs/grader-design.md).
 
@@ -62,8 +63,12 @@ flowchart LR
 | Multi-hop | 11 | 0.0% | 18.2% |
 | Statement vs minutes | 7 | 57.1% | 71.4% |
 | Date-sensitive | 7 | 38.1% | 42.9% |
-| Refusal | 10 | 93.3% | 93.3% |
-| **All (mean per question)** | **67** | **46.3%** | **62.7%** |
+| Refusal | 10 | 83.3% | 93.3% |
+| **All (mean per question)** | **67** | **44.8%** | **62.7%** |
+
+The refusal gain comes from three baseline answers that declined and then invented content, for
+example the contents of "January 2026 meeting minutes". Per-category rates are means over few
+questions (7 to 16), so read them as directions.
 
 Retrieval on the 56 answerable questions (`/vector-search` top 10, same 1000-character chunks):
 
@@ -75,32 +80,42 @@ Retrieval on the 56 answerable questions (`/vector-search` top 10, same 1000-cha
 
 ## Top issues found
 
-1. **Retrieval returns the wrong meeting's chunks** (78 of 201 baseline trials). Asked for the
+1. **Retrieval returns the wrong meeting's chunks** (81 of 201 baseline trials). Asked for the
    September 2025 range, the app retrieved July and October chunks and answered July's
    "4¼ to 4½ percent", 3 of 3 times.
 2. **Confident answers about a meeting the context does not cover** (judge flag on 38 failed
-   trials). Asked who dissented in July, it named the March dissenter with his March reason.
+   trials, indicative only). Asked who dissented in July, it named the March dissenter with his
+   March reason.
 3. **Right document, wrong chunk** (21 trials): the attendance chunk instead of the vote, so "no
    member dissented" when one did.
 4. **Near-empty cover pages fill the context:** 99 of 804 context slots (12.3%), concentrated on date
    questions, which then get invented dates.
 5. **The upload timestamp and "today" leak into answers:** "published on November 23, 2026" is the
-   ingestion date the app writes into every chunk header.
+   ingestion date the app writes into every chunk header, and some refusals invent 2026 content.
 
 Trace excerpts (chunk ids, documents, scores) for each issue are in section 5 of the report.
 
 ## The fix
 
 `vectorSearchMode: rerank`, one workspace setting. AnythingLLM's built-in local cross-encoder
-re-scores the nearest chunks and keeps the top 4. It was chosen over an embedder swap because it
-puts the right document in front of the model more often (recall@4 0.842 against 0.792), needs no
-re-ingest and no API spend, and keeps the documents on the machine.
+re-scores the nearest chunks and keeps the top 4.
+
+How it was chosen, in the order it happened:
+1. After the baseline run, a 1-trial reranker pilot on the same 67 questions raised context recall@4
+   to 0.84.
+2. An embedder-swap probe reached 0.75. That probe also enlarged the chunks to about 6,000
+   characters, so it changed two things at once.
+3. The reranker was chosen on that comparison, and because it needs no re-ingest and no API spend
+   and keeps the documents on the machine. It was then run with 3 trials.
+4. After the fix run, the embedder was re-measured at the baseline's 1000-character chunks. It
+   reached 0.79 against the reranker's 0.84, which confirms the choice.
 
 Side effects, reported rather than hidden:
 - the September minutes cover chunk, which holds only the upload timestamp, now ranks first for
-  one date question, so that answer is wrong in 3 of 3 trials (2 of 3 passed before; not
-  significant, but the cause is clear);
-- citation mismatches rose from 3 to 8 (right document, wrong page);
+  one date question, so that answer is wrong in 3 of 3 trials (2 of 3 passed before). At 3 trials
+  a single-question drop cannot reach significance, so it is named rather than tested;
+- 4 citation mismatches appear (right documents retrieved, but not the supporting passage), against
+  none in the baseline;
 - about 15% more prompt tokens, and slower retrieval because the reranker runs on CPU (median
   0.75 s against 0.27 s; end-to-end latency is indicative only, see the report).
 
@@ -113,19 +128,21 @@ From the committed traces, with no app and no LLM calls (Windows PowerShell; Pyt
 
 ```powershell
 python -m venv .venv; .venv\Scripts\pip install -r requirements-dev.txt -r requirements-report.txt
-.venv\Scripts\python -m rag_audit reproduce          # re-grade baseline and fix, re-run regressgate
-.venv\Scripts\python -m pytest -q                    # 46 tests + 32 subtests
+.venv\Scripts\python -m rag_audit reproduce          # re-grade every configuration, re-run regressgate
+.venv\Scripts\python -m pytest -q                    # 98 tests + 32 subtests
 .venv\Scripts\python report\build-report-figures.py  # charts and derived numbers
 .venv\Scripts\python report\render-report-pdf.py     # the PDF, via headless Microsoft Edge
 ```
 
-A full live re-run needs Docker Desktop, the corpus and an OpenAI-compatible endpoint behind
-`llm-api-guard` (about $0.30 at list prices). Move `traces\` aside first, or saved trials are
-skipped:
+A full live re-run needs Docker Desktop, the corpus and an OpenAI-compatible endpoint, ideally
+behind your own allowlisting proxy. `llm-api-guard` is not published. To use your own proxy, point
+`GENERIC_OPEN_AI_BASE_PATH` in `compose.yaml` at it; to use the guard, set `LLM_GUARD_DIR` to its
+checkout. `--budget-usd` caps chat and judge calls together. Move `traces\` aside first, or saved
+trials are skipped:
 
 ```powershell
 python scripts\download-corpus.py          # 16 PDFs, fails on any SHA-256 mismatch
-scripts\start-stack.ps1                    # guard + app; first run creates an app API key in .run\
+scripts\start-stack.ps1                    # proxy + app; first run creates an app API key in .run\
 python scripts\anythingllm-client.py workspace --slug fomc-2025
 python scripts\anythingllm-client.py ingest --slug fomc-2025 (Get-ChildItem data\corpus\*.pdf).FullName
 .venv\Scripts\python -m rag_audit full-rerun --configs baseline fix --budget-usd 3
@@ -147,14 +164,18 @@ openai` followed by `python -m rag_audit reembed`.
 
 ## Limitations
 
+- **The fix was selected and measured on the same 67 questions; there is no held-out set.**
 - One corpus, one chat model and 67 questions written by the auditor rather than taken from user
   logs. The numbers describe this setup, not AnythingLLM in general.
-- 3 trials per question detect large changes, not small per-question ones.
-- The LLM judge agreed with manual labels on 11 of 18 trials (61%), so unsupported-claim counts are
-  indicative; pass and fail never depend on it.
-- The grader was refined after reading the baseline traces. Every change applies to both
-  configurations, which were re-graded with `reproduce` ([details](docs/methodology.md#disclosures)).
-- Latency is confounded by a provider slowdown during the fix run; costs are estimates at OpenAI
+- 3 trials per question detect large changes; a drop on a single question cannot reach
+  significance.
+- The LLM judge agreed with manual labels on 11 of 18 trials (61%), below the 72% of always
+  answering "unsupported", so unsupported-claim counts are indicative. Pass and fail never depend
+  on it.
+- The grader and the cases were refined after reading the baseline traces, in two rounds. Every
+  change applies to both configurations, is listed by case id, and both were re-graded with
+  `reproduce` ([details](docs/methodology.md#post-baseline-changes-to-the-grader-and-the-cases)).
+- Latency is confounded by a provider slowdown during the fix run. Costs are estimates at OpenAI
   list prices.
 - Only the reranker went through the full 3-trial run; the embedder swap was compared on retrieval.
 
