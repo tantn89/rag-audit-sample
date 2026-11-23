@@ -53,6 +53,16 @@ CANDIDATE_EMBEDDER = AuditConfig(
     workspace=dict(BASELINE.workspace),
     embedder="text-embedding-3-small via llm-api-guard (chunks up to 8191 chars, 20 overlap)",
 )
+# The same embedder swap with the chunk size held at the baseline's 1000 characters, so only the
+# embedder changes. Retrieval-only (/vector-search), directly comparable with the fix's probe.
+CANDIDATE_EMBEDDER_1000 = AuditConfig(
+    name="candidate-openai-embedder-1000",
+    description="Baseline workspace settings with the embedder switched to text-embedding-3-small "
+                "(OpenAI-compatible, through the guard), documents re-embedded with "
+                "EMBEDDING_MODEL_MAX_CHUNK_LENGTH=1000, the baseline chunk size: one change.",
+    workspace=dict(BASELINE.workspace),
+    embedder="text-embedding-3-small via llm-api-guard (1000-char chunks, 20 overlap)",
+)
 
 # The chosen fix: the reranker raised context doc recall@4 from 0.57 to 0.84 in the 1-trial
 # pilot, against 0.75 for the embedder swap (measured with larger chunks, which favour it), with no
@@ -64,7 +74,8 @@ FIX = AuditConfig(
     workspace=dict(CANDIDATE_RERANK.workspace),
 )
 
-CONFIGS = {c.name: c for c in (BASELINE, CANDIDATE_RERANK, CANDIDATE_EMBEDDER, FIX)}
+CONFIGS = {c.name: c for c in (BASELINE, CANDIDATE_RERANK, CANDIDATE_EMBEDDER,
+                                CANDIDATE_EMBEDDER_1000, FIX)}
 
 
 def get_config(name: str) -> AuditConfig:

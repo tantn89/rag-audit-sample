@@ -10,9 +10,10 @@ services:
       EMBEDDING_ENGINE: generic-openai
       EMBEDDING_BASE_PATH: http://host.docker.internal:18431/v1
       EMBEDDING_MODEL_PREF: text-embedding-3-small
-      # AnythingLLM also uses this as the text-splitter chunk size: 8191 gives ~6k-char chunks
-      # instead of ~900. The recorded embedder candidate was measured with it; set "1000" to
-      # change the embedder alone.
-      EMBEDDING_MODEL_MAX_CHUNK_LENGTH: "8191"
+      # AnythingLLM also uses this as the text-splitter chunk size. The default 1000 keeps the
+      # baseline's ~900-char chunks, so only the embedder changes (candidate-openai-embedder-1000).
+      # The first, confounded candidate (candidate-openai-embedder) was measured with 8191, which
+      # gives ~6k-char chunks: set $env:EMBEDDING_MODEL_MAX_CHUNK_LENGTH = '8191' to repeat it.
+      EMBEDDING_MODEL_MAX_CHUNK_LENGTH: "${EMBEDDING_MODEL_MAX_CHUNK_LENGTH:-1000}"
       GENERIC_OPEN_AI_EMBEDDING_API_KEY: ${GUARD_TOKEN:?GUARD_TOKEN must be set by scripts/start-stack.ps1}
       GENERIC_OPEN_AI_EMBEDDING_MAX_CONCURRENT_CHUNKS: "50"

@@ -1,0 +1,14 @@
+{
+  "config": "candidate-openai-embedder-1000",
+  "description": "Baseline workspace settings with the embedder switched to text-embedding-3-small (OpenAI-compatible, through the guard), documents re-embedded with EMBEDDING_MODEL_MAX_CHUNK_LENGTH=1000, the baseline chunk size: one change.",
+  "embedder": "text-embedding-3-small via llm-api-guard (1000-char chunks, 20 overlap)",
+  "retrieval": {
+    "vector_search_top10": {
+      "cases": 56,
+      "recall@1": 0.506,
+      "recall@4": 0.792,
+      "recall@10": 0.973,
+      "mrr@10": 0.691
+    }
+  }
+}
