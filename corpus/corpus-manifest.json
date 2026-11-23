@@ -1,0 +1,104 @@
+{
+  "description": "2025 FOMC post-meeting statements and meeting minutes, Board of Governors of the Federal Reserve System",
+  "license": "Public domain (federalreserve.gov/disclaimer.htm: \"information on Board's website is in the public domain and may be copied and distributed without permission\"; cite the Board as the source)",
+  "source_index": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+  "retrieved": "2026-11-23",
+  "files": [
+    {
+      "name": "fomc-statement-20250129.pdf",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/monetary20250129a1.pdf",
+      "sha256": "fbb886257e82c1ef1c21b34f235dfe9435eefc902c04d53356874784d6691a21",
+      "bytes": 199189
+    },
+    {
+      "name": "fomc-minutes-20250129.pdf",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/fomcminutes20250129.pdf",
+      "sha256": "84d9098f36e09d772badc5a0f63bb577f8d3242d334fd3c1e0d94a0ddf137f14",
+      "bytes": 1275562
+    },
+    {
+      "name": "fomc-statement-20250319.pdf",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/monetary20250319a1.pdf",
+      "sha256": "994bda73108026f4b59cadfea19979bc1b4e14eec750d2315e9c66142158e509",
+      "bytes": 193811
+    },
+    {
+      "name": "fomc-minutes-20250319.pdf",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/fomcminutes20250319.pdf",
+      "sha256": "0edc5ca830a3d3a47f0e9367f20431422507b77ffdc4f1d3d6aa3be9b76ea1f1",
+      "bytes": 435301
+    },
+    {
+      "name": "fomc-statement-20250507.pdf",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/monetary20250507a1.pdf",
+      "sha256": "b4af4f576ea67764285a6a1a663ff145f52b7be478eeff5153c508175355505b",
+      "bytes": 202692
+    },
+    {
+      "name": "fomc-minutes-20250507.pdf",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/fomcminutes20250507.pdf",
+      "sha256": "eb65a4be5ad8738f2146912f055f303d02f0487804708279437a080542f2da3a",
+      "bytes": 450568
+    },
+    {
+      "name": "fomc-statement-20250618.pdf",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/monetary20250618a1.pdf",
+      "sha256": "fd5214f1d93b8289609fb5ac35c12108092d4c82c7dea0804ef8b60575166b7f",
+      "bytes": 138722
+    },
+    {
+      "name": "fomc-minutes-20250618.pdf",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/fomcminutes20250618.pdf",
+      "sha256": "074934b7b63d043b87fbcd547ea52a269d91722b21291c00853ff63b06d979fa",
+      "bytes": 494815
+    },
+    {
+      "name": "fomc-statement-20250730.pdf",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/monetary20250730a1.pdf",
+      "sha256": "a03d33f6c48a6e3b5d0c2cacb76c0792a517c99c6d900d0bb8f362145bc5e579",
+      "bytes": 225118
+    },
+    {
+      "name": "fomc-minutes-20250730.pdf",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/fomcminutes20250730.pdf",
+      "sha256": "e18163a633e04365f1c8650919b7098f7d651e50c9d417d857b6d372523584a8",
+      "bytes": 448093
+    },
+    {
+      "name": "fomc-statement-20250917.pdf",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/monetary20250917a1.pdf",
+      "sha256": "74f7ac62620517260433296be0c7c62037ec7013987859ba2583bffb28b2b8e9",
+      "bytes": 207980
+    },
+    {
+      "name": "fomc-minutes-20250917.pdf",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/fomcminutes20250917.pdf",
+      "sha256": "e6d5d44bca3bb4d6eff8d4eb61104e1b811f0ecdb52a0df0ab71df953155f813",
+      "bytes": 465728
+    },
+    {
+      "name": "fomc-statement-20251029.pdf",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/monetary20251029a1.pdf",
+      "sha256": "a7ed111aafc91558c58ff47d594b6198bf616c9ffc48b3e61da640ba939a8efe",
+      "bytes": 172946
+    },
+    {
+      "name": "fomc-minutes-20251029.pdf",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/fomcminutes20251029.pdf",
+      "sha256": "4696f78d23c1d288b9561a495444455207b581cc220e02a95cda059aea2613f8",
+      "bytes": 457797
+    },
+    {
+      "name": "fomc-statement-20251210.pdf",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/monetary20251210a1.pdf",
+      "sha256": "234226e25444b3a2435f9a420064fba4d7d2a208793fe9efe74ec2b2f4328855",
+      "bytes": 178358
+    },
+    {
+      "name": "fomc-minutes-20251210.pdf",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/fomcminutes20251210.pdf",
+      "sha256": "80bf91467e6e9a582f953419667a54e89bbdd9e7b2ac3212d41cb834f0c6420c",
+      "bytes": 402431
+    }
+  ]
+}
