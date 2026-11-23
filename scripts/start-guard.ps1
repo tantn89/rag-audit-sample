@@ -3,19 +3,32 @@
   Start llm-api-guard in the background for this project and save its per-launch local token.
 
 .DESCRIPTION
-  The guard listens on 127.0.0.1:<listen_port>, injects the real ShopAIKey key from the vault and
-  forwards only to the fixed upstream. This script:
+  llm-api-guard is the author's local allowlisting proxy (not published with this repository).
+  It listens on 127.0.0.1:<listen_port>, injects the real key of an OpenAI-compatible endpoint
+  and forwards only to that fixed upstream. This script:
     1. refuses to start a second guard when the port is already taken (stop the owner instead);
     2. generates a random local token that the RAG app uses as its "OpenAI API key";
     3. writes the token to .run/guard-token and the PID to .run/guard.pid (both git-ignored).
   The real upstream key is never seen by this script or the app.
+
+  To re-run the audit live without it, point compose.yaml's GENERIC_OPEN_AI_BASE_PATH at any
+  OpenAI-compatible endpoint, ideally behind your own allowlisting proxy.
+
+.PARAMETER GuardDir
+  The llm-api-guard checkout. Defaults to $env:LLM_GUARD_DIR; there is no built-in path.
 #>
 [CmdletBinding()]
 param(
-  [string] $GuardDir = "$HOME\Documents\Claude\Projects\llm-api-guard",
+  [string] $GuardDir = $env:LLM_GUARD_DIR,
   [int] $TimeoutSeconds = 60
 )
 $ErrorActionPreference = 'Stop'
+if (-not $GuardDir) {
+  throw 'Set -GuardDir or $env:LLM_GUARD_DIR to your llm-api-guard checkout.'
+}
+if (-not (Test-Path -LiteralPath (Join-Path $GuardDir 'guard-config.json'))) {
+  throw "No guard-config.json in '$GuardDir'; is it an llm-api-guard checkout?"
+}
 $runDir = Join-Path (Split-Path $PSScriptRoot -Parent) '.run'
 New-Item -ItemType Directory -Force $runDir | Out-Null
 

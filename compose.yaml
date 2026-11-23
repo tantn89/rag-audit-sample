@@ -1,6 +1,8 @@
 # AnythingLLM (the audited app), pinned to an exact release and image digest.
-# Chat goes to ShopAIKey only through llm-api-guard on the host (127.0.0.1:18431);
-# the container gets the guard's per-launch local token, never the real provider key.
+# Chat goes to an OpenAI-compatible endpoint only through llm-api-guard, a local allowlisting
+# proxy on the host (127.0.0.1:18431); the container gets the guard's per-launch local token,
+# never the real provider key. Without the guard, set GENERIC_OPEN_AI_BASE_PATH to your own
+# OpenAI-compatible endpoint (ideally behind your own allowlisting proxy).
 # Start with scripts\start-stack.ps1, which starts the guard and sets GUARD_TOKEN.
 name: rag-audit-sample
 
@@ -18,11 +20,13 @@ services:
       # Chat LLM: OpenAI-compatible endpoint = the local guard
       LLM_PROVIDER: generic-openai
       GENERIC_OPEN_AI_BASE_PATH: http://host.docker.internal:18431/v1
+      # The configured model preference; which model the endpoint actually serves is its own
+      # report (the judge's responses named gpt-4.1-mini), not independently verified.
       GENERIC_OPEN_AI_MODEL_PREF: ${CHAT_MODEL:-gpt-4.1-mini}
       GENERIC_OPEN_AI_MODEL_TOKEN_LIMIT: "32000"
       GENERIC_OPEN_AI_MAX_TOKENS: "1024"
       GENERIC_OPEN_AI_API_KEY: ${GUARD_TOKEN:?GUARD_TOKEN must be set by scripts/start-stack.ps1}
-      # The guard buffers whole responses and ShopAIKey keeps SSE streams open, so a streamed
+      # The guard buffers whole responses and the endpoint kept SSE streams open, so a streamed
       # completion never finishes through the guard. Non-streaming calls also report token usage.
       GENERIC_OPENAI_STREAMING_DISABLED: "true"
       # Audit scope is document Q&A; the guard would block undeclared tool schemas anyway.

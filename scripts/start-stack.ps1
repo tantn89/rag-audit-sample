@@ -4,7 +4,7 @@
 
 .DESCRIPTION
   Reuses a guard already started by start-guard.ps1 for this project (token in .run\guard-token);
-  otherwise starts one. Waits until the app answers /api/ping. Stop everything with
+  otherwise starts one from $env:LLM_GUARD_DIR. Waits until the app answers /api/ping. Stop everything with
   scripts\stop-stack.ps1.
 
   -Embedder openai adds compose.embedder-openai.yaml (text-embedding-3-small through the guard).
