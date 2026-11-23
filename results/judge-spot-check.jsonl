@@ -1,18 +1,18 @@
-{"config": "baseline", "key": "date-current-range#1#a216a7254d79", "human_supported": false, "note": "'current range 4.25-4.5' rests on a July chunk while a December chunk says the Committee lowered the range"}
-{"config": "baseline", "key": "date-jan-statement-release#2#1625e39e4b0a", "human_supported": false, "note": "'released January 31' is in no chunk (only cover pages were retrieved)"}
-{"config": "baseline", "key": "date-sep-minutes-published#1#9c0c7f27691c", "human_supported": false, "note": "'published November 23, 2026' is the ingestion-date stamp, not document content"}
-{"config": "baseline", "key": "fact-dec-reserve-purchases#1#61252c559e01", "human_supported": false, "note": "'longer-term Treasury securities to support accommodative conditions' is invented; no December chunk retrieved"}
-{"config": "baseline", "key": "fact-jan-next-meeting#2#641e1a621e54", "human_supported": false, "note": "'May 6-7' comes from the March minutes chunk but is attributed to the January minutes"}
-{"config": "baseline", "key": "fact-jul-dissenters#3#2435ac50f52b", "human_supported": false, "note": "Waller's March dissent attributed to July"}
-{"config": "baseline", "key": "fact-oct-dissenters#1#1107ba0519c6", "human_supported": false, "note": "Bowman and Goolsbee dissents invented"}
-{"config": "baseline", "key": "fact-soma-manager#1#25ec3823b3c8", "human_supported": true, "note": "the New York Fed selection is in the January minutes chunk (answers a different question, but grounded)"}
-{"config": "baseline", "key": "mh-cut-count#2#d7225e275fd2", "human_supported": false, "note": "'lowered once' is not supported; the context shows a July range and an October cut only"}
-{"config": "baseline", "key": "mh-goolsbee-oct-dec#2#cfc95c5519f9", "human_supported": false, "note": "no October or December vote chunk retrieved"}
-{"config": "baseline", "key": "mh-iorb-change#3#4047d3c14558", "human_supported": true, "note": "4.4 (January) and 4.15 (September) are both in the chunks; incomplete, not ungrounded"}
-{"config": "baseline", "key": "mh-miran-dissents#3#337eff58174a", "human_supported": true, "note": "two dissents is what the retrieved chunks show"}
-{"config": "baseline", "key": "mh-treasury-cap-path#1#36eda3470664", "human_supported": true, "note": "25 to 5 billion from April 1 is in the March minutes chunk"}
-{"config": "baseline", "key": "mh-unemployment-trend#2#31a5e529e84e", "human_supported": true, "note": "borderline: states the rate is not given, then hedges an inference from 'slower' payroll gains"}
-{"config": "baseline", "key": "mh-waller-dissents#2#8742e7cee571", "human_supported": false, "note": "'did not dissent at any 2025 meeting' generalises from one May vote list"}
-{"config": "baseline", "key": "num-mar-treasury-cap#2#932a8df6513b", "human_supported": false, "note": "'before, all principal was rolled over' comes from the December directive"}
-{"config": "baseline", "key": "svm-dec-vote-split#2#0a35cc01ff0a", "human_supported": false, "note": "October minutes content presented as the December minutes"}
-{"config": "baseline", "key": "svm-jul-framework#3#f9ca763b72c3", "human_supported": false, "note": "'complete by late summer' comes from the June minutes chunk, presented as the July minutes"}
+{"config": "baseline", "case_id": "date-current-range", "trial": 1, "human_supported": false, "note": "'current range 4.25-4.5' rests on a July chunk while a December chunk says the Committee lowered the range"}
+{"config": "baseline", "case_id": "date-jan-statement-release", "trial": 2, "human_supported": false, "note": "'released January 31' is in no chunk (only cover pages were retrieved)"}
+{"config": "baseline", "case_id": "date-sep-minutes-published", "trial": 1, "human_supported": false, "note": "'published November 23, 2026' is the ingestion-date stamp, not document content"}
+{"config": "baseline", "case_id": "fact-dec-reserve-purchases", "trial": 1, "human_supported": false, "note": "'longer-term Treasury securities to support accommodative conditions' is invented; no December chunk retrieved"}
+{"config": "baseline", "case_id": "fact-jan-next-meeting", "trial": 2, "human_supported": false, "note": "'May 6-7' comes from the March minutes chunk but is attributed to the January minutes"}
+{"config": "baseline", "case_id": "fact-jul-dissenters", "trial": 3, "human_supported": false, "note": "Waller's March dissent attributed to July"}
+{"config": "baseline", "case_id": "fact-oct-dissenters", "trial": 1, "human_supported": false, "note": "Bowman and Goolsbee dissents invented"}
+{"config": "baseline", "case_id": "fact-soma-manager", "trial": 1, "human_supported": true, "note": "the New York Fed selection is in the January minutes chunk (answers a different question, but grounded)"}
+{"config": "baseline", "case_id": "mh-cut-count", "trial": 2, "human_supported": false, "note": "'lowered once' is not supported; the context shows a July range and an October cut only"}
+{"config": "baseline", "case_id": "mh-goolsbee-oct-dec", "trial": 2, "human_supported": false, "note": "no October or December vote chunk retrieved"}
+{"config": "baseline", "case_id": "mh-iorb-change", "trial": 3, "human_supported": true, "note": "4.4 (January) and 4.15 (September) are both in the chunks; incomplete, not ungrounded"}
+{"config": "baseline", "case_id": "mh-miran-dissents", "trial": 3, "human_supported": true, "note": "two dissents is what the retrieved chunks show"}
+{"config": "baseline", "case_id": "mh-treasury-cap-path", "trial": 1, "human_supported": true, "note": "25 to 5 billion from April 1 is in the March minutes chunk"}
+{"config": "baseline", "case_id": "mh-unemployment-trend", "trial": 2, "human_supported": true, "note": "borderline: states the rate is not given, then hedges an inference from 'slower' payroll gains"}
+{"config": "baseline", "case_id": "mh-waller-dissents", "trial": 2, "human_supported": false, "note": "'did not dissent at any 2025 meeting' generalises from one May vote list"}
+{"config": "baseline", "case_id": "num-mar-treasury-cap", "trial": 2, "human_supported": false, "note": "'before, all principal was rolled over' comes from the December directive"}
+{"config": "baseline", "case_id": "svm-dec-vote-split", "trial": 2, "human_supported": false, "note": "October minutes content presented as the December minutes"}
+{"config": "baseline", "case_id": "svm-jul-framework", "trial": 3, "human_supported": false, "note": "'complete by late summer' comes from the June minutes chunk, presented as the July minutes"}

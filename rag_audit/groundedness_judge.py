@@ -4,7 +4,9 @@ The grader asks for a verdict only on trials whose answer failed its key-fact ch
 refusing, and on out-of-corpus questions that were answered instead of declined. The judge says
 whether every factual claim in the answer is supported by the retrieved chunks. Verdicts are
 cached in results/<config>/judge-verdicts.jsonl (committed), keyed by case, trial and a hash of
-the answer, so recomputing the numbers never calls the LLM again.
+everything the judge saw (question, answer, cited chunk titles and text) and the prompt version,
+so recomputing the numbers never calls the LLM again and a changed trace never reuses a stale
+verdict.
 """
 
 from __future__ import annotations
@@ -41,8 +43,9 @@ _JUDGE_ATTRIBUTION = (
     "meeting' or 'only once' is supported only if the chunks cover every case. "
 )
 _JUDGE_REPLY = 'Reply with JSON only: {"supported": true or false, "unsupported_claims": ["..."]}'
-# v3: v2 did not fix attribution (10 of 17 agreed), so the judge must now cite, per claim, the
-# chunk that states it for the meeting the claim is about; chunks are labelled in plain words.
+# v3: v2 did not fix attribution (11 of 18 agreed, the same as v1), so the judge must now cite,
+# per claim, the chunk that states it for the meeting the claim is about; chunks are labelled in
+# plain words.
 _JUDGE_PER_CLAIM = (
     "You are a strict fact-checker for a retrieval-augmented assistant answering questions about "
     "FOMC meetings. Each context chunk is labelled with the meeting and document it comes from. "
@@ -70,9 +73,15 @@ def chunk_label(title: str | None) -> str:
     return f"{kind} of the FOMC meeting ending {_MONTHS[int(m[3]) - 1]} {int(m[4])}, {m[2]}"
 
 
-def answer_key(case_id: str, trial: int, answer: str) -> str:
-    digest = hashlib.sha256((answer or "").encode("utf-8")).hexdigest()[:12]
-    return f"{case_id}#{trial}#{digest}"
+def verdict_key(trace: dict, version: int = JUDGE_VERSION) -> str:
+    """Cache key of one verdict: readable case#trial plus a hash of every judge input."""
+    judged = {"judge_version": version, "question": trace.get("question") or "",
+              "answer": trace.get("answer") or "",
+              "sources": [[s.get("title") or "", s.get("text") or ""]
+                          for s in trace.get("sources") or []]}
+    digest = hashlib.sha256(json.dumps(judged, ensure_ascii=False, sort_keys=True)
+                            .encode("utf-8")).hexdigest()[:16]
+    return f"{trace.get('case_id')}#{trace.get('trial')}#{digest}"
 
 
 def verdicts_path(config: str) -> Path:
@@ -95,6 +104,27 @@ def judge_cost(config: str) -> float:
     """Every judge call ever made for this config, all prompt versions."""
     return sum(usage_cost(r.get("prompt_tokens", 0), r.get("completion_tokens", 0))
                for r in _rows(config))
+
+
+DEFAULT_JUDGE_CALL_USD = 0.002  # used until a verdict has been logged (well above a real call)
+
+
+def judge_call_estimate(configs) -> float:
+    """Mean logged cost of one judge call across `configs` (a conservative default before any)."""
+    rows = [r for c in configs for r in _rows(c)]
+    if not rows:
+        return DEFAULT_JUDGE_CALL_USD
+    return sum(usage_cost(r.get("prompt_tokens", 0), r.get("completion_tokens", 0))
+               for r in rows) / len(rows)
+
+
+def affordable_calls(wanted: int, spent_usd: float, per_call_usd: float, budget_usd: float) -> int:
+    """How many of `wanted` judge calls fit in the budget after `spent_usd`."""
+    if per_call_usd <= 0:
+        return wanted
+    room = budget_usd - spent_usd
+    # the small epsilon keeps float error from losing a call that fits exactly ($0.01 / $0.002)
+    return max(0, min(wanted, int(room / per_call_usd + 1e-9)))
 
 
 def _guard_token() -> str:

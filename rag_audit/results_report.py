@@ -10,8 +10,8 @@ from datetime import datetime, timezone
 from rag_audit.audit_configs import get_config
 from rag_audit.eval_cases import CATEGORIES, EvalCase
 from rag_audit.grading import TrialGrade, first_hit_rank, grade_trial, recall_at_k
-from rag_audit.groundedness_judge import answer_key, judge_cost, load_verdicts
-from rag_audit.trace_store import RESULTS, trace_cost
+from rag_audit.groundedness_judge import judge_cost, load_verdicts, verdict_key
+from rag_audit.trace_store import RESULTS, load_bundle, trace_cost
 
 
 def grade_all(cases: list[EvalCase], chats: list[dict], config: str) -> list[tuple[dict, TrialGrade]]:
@@ -22,8 +22,7 @@ def grade_all(cases: list[EvalCase], chats: list[dict], config: str) -> list[tup
         case = by_id.get(t["case_id"])
         if case is None:
             continue  # trace for a case that was removed from the eval set
-        verdict = verdicts.get(answer_key(case.id, t["trial"], t.get("answer") or ""))
-        graded.append((t, grade_trial(case, t, verdict)))
+        graded.append((t, grade_trial(case, t, verdicts.get(verdict_key(t)))))
     return graded
 
 
@@ -109,7 +108,11 @@ def summarize(config: str, cases: list[EvalCase], chats: list[dict], retrieval: 
         "est_cost_usd": {"chat": round(sum(trace_cost(t) for t in ok), 4),
                          "judge": round(judge_cost(config), 4)},
         "judge": {"verdicts": len(verdicts),
-                  "unsupported": sum(not v["supported"] for v in verdicts.values())},
+                  "unsupported": sum(not v["supported"] for v in verdicts.values()),
+                  # trials the grader would send to the judge that have no cached verdict (they
+                  # carry no unsupported_claim flag; `judge <config>` would fill them in)
+                  "needed_without_verdict": sum(g.needs_judge and verdict_key(t) not in verdicts
+                                                for t, g in quality)},
         "per_case": [{"id": cid, "category": cat_of[cid], "passed": sum(g.passed for g in gs),
                       "trials": len(gs), "failures": [g.failure for g in gs if not g.passed]}
                      for cid, gs in sorted(per_case.items())],
@@ -150,22 +153,33 @@ def regressgate_report(config: str, cases: list[EvalCase], graded: list[tuple[di
 
 
 def judge_agreement() -> dict:
-    """Manual spot check: results/judge-spot-check.jsonl rows {config, key, human_supported},
-    scored against every judge prompt version that has verdicts for those trials."""
+    """Manual spot check: results/judge-spot-check.jsonl rows {config, case_id, trial,
+    human_supported}, scored against every judge prompt version that has a verdict for that
+    trace, next to the constant baseline of always answering "unsupported"."""
     from rag_audit.groundedness_judge import JUDGE_PROMPTS
     path = RESULTS / "judge-spot-check.jsonl"
     if not path.exists():
         return {"checked": 0}
     rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line]
+    traces = {}
+    for config in {r["config"] for r in rows}:
+        chats, _ = load_bundle(config)
+        traces.update({(config, t["case_id"], t["trial"]): t for t in chats})
     out = {}
     for version in sorted(JUDGE_PROMPTS):
         pairs = []
         for r in rows:
-            v = load_verdicts(r["config"], version).get(r["key"])
+            t = traces.get((r["config"], r["case_id"], r["trial"]))
+            v = load_verdicts(r["config"], version).get(verdict_key(t, version)) if t else None
             if v is not None:
-                pairs.append((v["supported"], r["human_supported"], r["key"]))
+                pairs.append((v["supported"], r["human_supported"], f"{r['case_id']}#{r['trial']}"))
         agree = sum(a == b for a, b, _ in pairs)
         out[f"v{version}"] = {"checked": len(pairs), "agree": agree,
                               "agreement_rate": round(agree / len(pairs), 3) if pairs else None,
                               "disagreements": [k for a, b, k in pairs if a != b]}
+    unsupported = sum(not r["human_supported"] for r in rows)
+    # The spot check is in-sample (baseline trials, also used while iterating on the prompt), and
+    # most sampled answers are unsupported: a judge must beat this constant to add information.
+    out["constant_unsupported"] = {"checked": len(rows), "agree": unsupported,
+                                   "agreement_rate": round(unsupported / len(rows), 3) if rows else None}
     return out

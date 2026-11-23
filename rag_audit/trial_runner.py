@@ -1,8 +1,14 @@
 """Drive the app: retrieval probes via /vector-search (no LLM spend) and chat trials via /chat.
 
-Chat trials are resumable (a trial with a saved trace is skipped), bounded (at most
-`max_attempts` billed calls per trial, so a retry can never multiply spend), and budgeted (the
-run stops submitting work when spent + projected cost would exceed the budget).
+Chat trials are resumable (a trial with a saved trace is skipped), bounded per pass (one `run`
+makes at most `max_attempts` billed calls per trial, retrying only timeouts, 5xx errors and
+connection failures after a 10 s then 30 s backoff), and budgeted (the run stops submitting work
+when spent + projected cost would exceed the budget). A trial whose attempts all timed out is
+saved as a timeout; each explicit `run --retry-timeouts` pass re-runs it, adding up to
+`max_attempts` more billed calls, so after one such pass a trial can carry 2 x `max_attempts`
+attempts in its trace (the published runs: at most 4). A
+timed-out call may still be billed by the provider, but its token usage is unknown: the cost
+estimate charges it the running average and the published cost leaves it unmetered.
 """
 
 from __future__ import annotations
