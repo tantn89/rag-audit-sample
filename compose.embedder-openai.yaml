@@ -1,0 +1,18 @@
+# Optional override: replace the built-in local embedder with an OpenAI-compatible one
+# (text-embedding-3-small) reached through llm-api-guard, like chat. Settings only; the same
+# values can be entered in AnythingLLM under Settings > Embedder.
+#   scripts\start-stack.ps1 -Embedder openai
+# Switching the embedder changes the vector size (384 -> 1536), so the workspace documents must
+# be re-embedded afterwards (python -m rag_audit reembed).
+services:
+  anythingllm:
+    environment:
+      EMBEDDING_ENGINE: generic-openai
+      EMBEDDING_BASE_PATH: http://host.docker.internal:18431/v1
+      EMBEDDING_MODEL_PREF: text-embedding-3-small
+      # AnythingLLM also uses this as the text-splitter chunk size: 8191 gives ~6k-char chunks
+      # instead of ~900. The recorded embedder candidate was measured with it; set "1000" to
+      # change the embedder alone.
+      EMBEDDING_MODEL_MAX_CHUNK_LENGTH: "8191"
+      GENERIC_OPEN_AI_EMBEDDING_API_KEY: ${GUARD_TOKEN:?GUARD_TOKEN must be set by scripts/start-stack.ps1}
+      GENERIC_OPEN_AI_EMBEDDING_MAX_CONCURRENT_CHUNKS: "50"

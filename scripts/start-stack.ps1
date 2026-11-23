@@ -6,12 +6,20 @@
   Reuses a guard already started by start-guard.ps1 for this project (token in .run\guard-token);
   otherwise starts one. Waits until the app answers /api/ping. Stop everything with
   scripts\stop-stack.ps1.
+
+  -Embedder openai adds compose.embedder-openai.yaml (text-embedding-3-small through the guard).
+  After switching embedders in either direction, run `python -m rag_audit reembed`.
 #>
 [CmdletBinding()]
-param([int] $TimeoutSeconds = 180)
+param(
+  [int] $TimeoutSeconds = 180,
+  [ValidateSet('native', 'openai')] [string] $Embedder = 'native'
+)
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path $PSScriptRoot -Parent
 $tokenFile = Join-Path $repo '.run\guard-token'
+$composeFiles = @('-f', (Join-Path $repo 'compose.yaml'))
+if ($Embedder -eq 'openai') { $composeFiles += @('-f', (Join-Path $repo 'compose.embedder-openai.yaml')) }
 
 docker info --format '{{.ServerVersion}}' *> $null
 if ($LASTEXITCODE -ne 0) { throw 'Docker engine is not running. Start Docker Desktop first.' }
@@ -20,7 +28,8 @@ if (-not (Test-Path $tokenFile)) { & (Join-Path $PSScriptRoot 'start-guard.ps1')
 
 $env:GUARD_TOKEN = (Get-Content -LiteralPath $tokenFile -Raw).Trim()
 try {
-  docker compose --project-directory $repo -f (Join-Path $repo 'compose.yaml') up -d
+  # up -d recreates the container when the embedder override is added or removed
+  docker compose --project-directory $repo @composeFiles up -d
   if ($LASTEXITCODE -ne 0) { throw "docker compose up failed (exit $LASTEXITCODE)." }
 } finally {
   Remove-Item Env:GUARD_TOKEN -ErrorAction SilentlyContinue
@@ -35,7 +44,7 @@ while ($true) {
   if ((Get-Date) -gt $deadline) { throw "AnythingLLM did not answer /api/ping within $TimeoutSeconds s." }
   Start-Sleep -Seconds 2
 }
-Write-Host 'AnythingLLM is up at http://127.0.0.1:3001'
+Write-Host "AnythingLLM is up at http://127.0.0.1:3001 (embedder: $Embedder)"
 
 # First run: create a developer API key for scripts\anythingllm-client.py. This internal endpoint
 # accepts unauthenticated calls only while the instance has no password (fresh local setup),
